@@ -1,0 +1,378 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jan 31, 2022 at 05:25 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `leave.ictd`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `applications`
+--
+
+CREATE TABLE `applications` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `department` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admin_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `start` date DEFAULT NULL,
+  `end` date DEFAULT NULL,
+  `total_days` int(11) DEFAULT NULL,
+  `reason` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `stay` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `approve` varchar(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `comment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `return` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sent` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `applications`
+--
+
+INSERT INTO `applications` (`id`, `name`, `department`, `admin_id`, `employee_id`, `start`, `end`, `total_days`, `reason`, `stay`, `approve`, `comment`, `return`, `sent`, `created_at`, `updated_at`) VALUES
+(41, 'মোঃ আবদুস সাত্তার সরকার', 'যুগ্মসচিব', '263', 205, '2022-01-30', '2022-01-31', 2, 'আব', 'ঢাকা', NULL, NULL, NULL, NULL, '2022-01-30 03:50:26', '2022-01-30 03:50:26'),
+(42, 'মোঃ আবদুস সাত্তার সরকার', 'যুগ্মসচিব', '263', 205, '2022-01-30', '2022-01-31', 2, 'আব', 'ঢাকা', NULL, NULL, NULL, NULL, '2022-01-30 03:50:31', '2022-01-30 03:50:31'),
+(43, 'মোঃ আবদুস সাত্তার সরকার', 'যুগ্মসচিব', '263', 205, '2022-01-30', '2022-01-31', 2, 'আব', 'ঢাকা', NULL, NULL, NULL, NULL, '2022-01-30 03:50:34', '2022-01-30 03:50:34'),
+(44, 'মোঃ নাজমুল হক খন্দকার', 'সহকারী মেইন্টেনেন্স ইঞ্জিনিয়ার', '205', 237, '2022-01-30', '2022-01-31', 2, 'পারিবারিক', 'ঢাকা', '1', NULL, NULL, NULL, '2022-01-30 03:55:57', '2022-01-30 04:19:22'),
+(45, 'মোঃ নাজমুল হক খন্দকার', 'সহকারী মেইন্টেনেন্স ইঞ্জিনিয়ার', '205', 237, '2022-02-01', '2022-02-04', 4, 'শারীরিক অসুস্থ', 'ঢাকা', NULL, NULL, NULL, NULL, '2022-01-30 04:24:11', '2022-01-30 04:24:11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employees`
+--
+
+CREATE TABLE `employees` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `branch` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `department` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_active` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `employees`
+--
+
+INSERT INTO `employees` (`id`, `first_name`, `branch`, `phone`, `email`, `department`, `password`, `role`, `image`, `is_active`, `created_at`, `updated_at`) VALUES
+(154, 'মোঃ আব্দুর রহিম', 'সমন্বয় শাখা', '01722575970', 'abdur.rahim@ictd.gov.bd', 'ব্যক্তিগত কর্মকর্তা', '01722575970', '3', NULL, '1', NULL, NULL),
+(155, 'তাছলিমা আক্তার', 'রাজস্ব বাজেট শাখা ও প্রশাসন অধিশাখা', '01921215800', 'taslima.akter@ictd.gov.bd', 'ব্যক্তিগত কর্মকর্তা', '01921215800', '3', NULL, '1', NULL, NULL),
+(156, 'মোঃ হানিফ', 'আইসিটি প্রমোশন ও ব্র্যান্ডিং শাখা', '01816720172', 'md.hanif@ictd.gov.bd', 'প্রশাসনিক কর্মকর্তা', '01816720172', '3', NULL, '1', NULL, NULL),
+(157, 'মোঃ শরিফুল ইসলাম', 'লজিস্টিক সেবা-২ শাখা', '01922275654', 'shoriful.islam@ictd.gov.bd', 'প্রশাসনিক কর্মকর্তা', '01922275654', '3', NULL, '1', NULL, NULL),
+(158, 'চায়না আক্তার', 'উন্নয়ন বাজেট শাখা', '01923410711', 'china.aktar@ictd.gov.bd', 'প্রশাসনিক কর্মকর্তা', '01923410711', '3', NULL, '1', NULL, NULL),
+(159, 'মোঃ নুর হোসেন পারভেজ', 'প্রশাসন শাখা', '01823210262', 'nur.parvez@ictd.gov.bd', 'প্রশাসনিক কর্মকর্তা', '01823210262', '3', NULL, '1', NULL, NULL),
+(160, 'ভোলানাথ ত্রিপুরা', 'বৃত্তি ও ফেলোশিপ শাখা', '01556774213', 'bholanath@ictd.gov.bd', 'প্রশাসনিক কর্মকর্তা', '01556774213', '3', NULL, '1', NULL, NULL),
+(161, 'মোঃ রাশেদুর রহমান', 'জাতীয় সংসদ ও আন্তঃমন্ত্রণালয় শাখা ও কাউন্সিল অফিসার', '01712046524', 'rashedur.rahman@ictd.gov.bd', 'প্রশাসনিক কর্মকর্তা', '01712046524', '3', NULL, '1', NULL, NULL),
+(162, 'মোহাম্মদ শফিকুল ইসলাম খান', 'অর্গানাইজেশনাল সাপোর্ট অধিশাখা', '01536100337', 'mohammad.shofiqul@ictd.gov.bd', 'ব্যক্তিগত কর্মকর্তা', '01536100337', '3', NULL, '1', NULL, NULL),
+(163, 'জাহিদ আল সিদ্দিকী', 'প্রশাসন অনুবিভাগ', '01517263851', 'zahid.siddique@ictd.gov.bd', 'ব্যক্তিগত কর্মকর্তা', '01517263851', '3', NULL, '1', NULL, NULL),
+(164, 'মোঃ মিনহাজ হোসেন', 'পলিসি বাস্তবায়ন শাখা', '01760407187', 'minhaj.hossain@ictd.gov.bd', 'প্রশাসনিক কর্মকর্তা', '01760407187', '3', NULL, '1', NULL, NULL),
+(165, 'নুছরাত জাহান', 'সংস্থা-১', '01701799541', 'nusrat.jahan@ictd.gov.bd', 'প্রশাসনিক কর্মকর্তা', '01701799541', '3', NULL, '1', NULL, NULL),
+(166, 'ইসরাত অনামিকা', 'আন্তর্জাতিক বিষয় ও ঘটনাবলী সম্পর্কিত শাখা', '01515298562', 'israt.anamica@ictd.gov.bd', 'প্রশাসনিক কর্মকর্তা', '01515298562', '3', NULL, '1', NULL, NULL),
+(167, 'ফখর উদ্দীন আহমেদ', 'পরিকল্পনা-১ শাখা', '01670688668', 'fakar.ahamed@ictd.gov.bd', 'প্রশাসনিক কর্মকর্তা', '01670688668', '3', NULL, '1', NULL, NULL),
+(168, 'ফরিদা আক্তার মিষ্টি', 'সংস্থা-৩ শাখা', '01684913229', 'farida.misty@ictd.gov.bd', 'প্রশাসনিক কর্মকর্তা', '01684913229', '3', NULL, '1', NULL, NULL),
+(169, 'আহম্মেদ আলী', 'প্রশাসন শাখা', '01710795768', 'ahmmed.ali@ictd.gov.bd', 'প্রশাসনিক কর্মকর্তা', '01710795768', '3', NULL, '1', NULL, NULL),
+(170, 'মো: হযরত আলী', 'লজিস্টিক সেবা-১ শাখা', '01743958644', 'hazrat.ali@ictd.gov.bd', 'প্রশাসনিক কর্মকর্তা', '01743958644', '3', NULL, '1', NULL, NULL),
+(171, 'মো: সফিকুল ইসলাম', 'আইন ও পলিসি অনুবিভাগ', '01682953737', 'sofiqul.islam@ictd.gov.bd', 'ব্যাক্তিগত কর্মকর্তা', '01682953737', '3', NULL, '1', NULL, NULL),
+(172, 'মেজবাহ', 'প্রশাসন অধিশাখা', '01521119051', 'mesbaalam90@gmail.com', 'গরু', '01521119051', '3', NULL, '1', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `logins`
+--
+
+CREATE TABLE `logins` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(21, '2021_08_17_032937_create_add_oparetors_table', 1),
+(22, '2021_08_25_163909_create_logins', 1),
+(23, '2021_10_26_000000_create_users_table', 1),
+(24, '2021_12_11_144814_create_employees_table', 1),
+(25, '2021_12_15_152754_create_applications_table', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oparetors`
+--
+
+CREATE TABLE `oparetors` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `branch` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `department` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_active` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `oparetors`
+--
+
+INSERT INTO `oparetors` (`id`, `first_name`, `branch`, `phone`, `email`, `department`, `password`, `role`, `is_active`, `created_at`, `updated_at`) VALUES
+(63, 'মোঃ আবদুস সাত্তার সরকার', 'ডিজিটাল গভনেন্স ও সিকিউরিটি অনুবিভাগ', '01550150635', 'ssarker@ictd.gov.bd', 'যুগ্মসচিব', '01550150635', '2', '1', '2022-01-29 10:57:20', '2022-01-29 11:03:55'),
+(64, 'মোঃ আখতারুজ্জামান', 'প্রশাসন অনুবিভাগ', '01715016422', 'akhtaruzzaman@ictd.gov.bd', 'যুগ্মসচিব', '01715016422', '2', '1', '2022-01-29 11:18:16', '2022-01-29 11:18:16'),
+(65, 'সালমা সিদ্দিকা মাহতাব', 'লজিস্টিক সেবা অধিশাখা', '01714448369', 'salma.siddiqa@ictd.gov.bd', 'যুগ্মসচিব', '01714448369', '2', '1', '2022-01-29 11:20:17', '2022-01-29 11:20:17'),
+(66, 'রাজা মুহম্মদ আব্দুল হাই', 'প্রশাসন অধিশাখা', '01710873246', 'raza6676@ictd.gov.bd', 'উপসচিব', '01710873246', '2', '1', '2022-01-29 11:21:49', '2022-01-29 11:21:49'),
+(67, 'এস এম মুনীর উদ্দিন', 'জাতীয় সংসদ ও আন্তঃমন্ত্রণালয় শাখা ও কাউন্সিল অফিসার', '01712647458', 'inter-ministry@ictd.gov.bd', 'উপসচিব', '01712647458', '2', '1', '2022-01-29 11:22:51', '2022-01-29 11:22:51'),
+(68, 'মোঃ তবিবুর রহমান', 'লজিস্টিক সেবা-১ শাখা', '01717501023', 'logistic@ictd.gov.bd', 'উপসচিব', '01717501023', '2', '1', '2022-01-29 11:23:44', '2022-01-29 11:23:44'),
+(69, 'ইসরাত জাহান', 'প্রশাসন শাখা', '01673299705', 'israt@ictd.gov.bd', 'উপসচিব', '01673299705', '2', '1', '2022-01-29 11:25:35', '2022-01-29 11:25:35'),
+(70, 'রায়হানা ইসলাম', 'লজিস্টিক সেবা-২ শাখা', '01716639482', 'raihanaislam1976@ictd.gov.bd', 'উপসচিব', '01716639482', '2', '1', '2022-01-29 11:27:21', '2022-01-29 11:27:21'),
+(71, 'জাহিদা খাতুন', 'লাইব্রেরি ও গবেষণা শাখা', '01552396360', 'zahida.khatun@ictd.gov.bd', 'সহকারী সচিব', '01552396360', '2', '1', '2022-01-29 11:28:22', '2022-01-29 11:28:22'),
+(72, 'মো: জিল্লুর রহমান', 'উন্নয়ন বাজেট শাখা', '01727666929', 'pstosecretary@ictd.gov.bd', 'উপসচিব', '01727666929', '2', '1', '2022-01-29 11:33:10', '2022-01-29 11:33:10'),
+(73, 'মোঃ জাহিদুল ইসলাম', 'হিসাব ও নিরীক্ষা শাখা', '01723139358', 'zahid@ictd.gov.bd', 'হিসাবরক্ষণ কর্মকর্তা', '01723139358', '2', '1', '2022-01-29 11:34:08', '2022-01-29 11:34:08'),
+(74, 'ড. খন্দকার আজিজুল ইসলাম', 'পরিকল্পনা ও উন্নয়ন অনুবিভাগ', '01711707421', 'khandokerazizul@ictd.gov.bd', 'অতিরিক্ত সচিব', '01711707421', '2', '1', '2022-01-29 11:35:56', '2022-01-29 11:35:56'),
+(75, 'মোছাঃ আসপিয়া আকতার', 'পরিকল্পনা অধিশাখা', '01715750827', 'aspia.dc@ictd.gov.bd', 'উপসচিব', '01715750827', '2', '1', '2022-01-29 11:37:23', '2022-01-29 11:37:23'),
+(76, 'মোঃ মনির হোসেন', 'উন্নয়ন, বাস্তবায়ন, পরিবীক্ষণ ও মূল্যায়ন অধিশাখা', '01718670894', 'manir@ictd.gov.bd', 'উপসচিব', '01718670894', '2', '1', '2022-01-29 11:38:44', '2022-01-29 11:38:44'),
+(77, 'তওহীদ আহমদ সজল', 'পরিকল্পনা-১ শাখা', '01716976767', 'towhid.sajal@ictd.gov.bd', 'উপসচিব', '01716976767', '2', '1', '2022-01-29 11:39:44', '2022-01-29 11:39:44'),
+(78, 'রোজিনা আক্তার', 'পরিকল্পনা-৩ শাখা', '01714633449', 'rozina.akther@ictd.gov.bd', 'সিনিয়র সহকারী সচিব', '01714633449', '2', '1', '2022-01-29 11:41:10', '2022-01-29 11:41:10'),
+(79, 'ফারজানা ইয়াসমিন', 'পরিবীক্ষণ ও মূল্যায়ন-১ শাখা', '01746601192', 'farzana@ictd.gov.bd', 'সহকারী সচিব', '01746601192', '2', '1', '2022-01-29 11:42:07', '2022-01-29 11:42:07'),
+(80, 'নাহিদ সুলতানা মল্লিক', 'হিউম্যান রিসোর্স ডেভেলপমেন্ট অধিশাখা', '01711101766', 'nahidshami@ictd.gov.bd', 'যুগ্মসচিব', '01711101766', '2', '1', '2022-01-29 11:45:33', '2022-01-29 11:45:33'),
+(81, 'মোহাম্মদ নজরুল ইসলাম', 'আইসিটি প্রমোশন অধিশাখা', '01731650229', 'nazrul.islam@ictd.gov.bd', 'উপসচিব', '01731650229', '2', '1', '2022-01-29 11:46:41', '2022-01-29 11:46:41'),
+(82, 'এস এম শফিক', 'কর্মসম্পাদন ও কৌশল শাখা', '01915849314', 's.safiq@ictd.gov.bd', 'উপসচিব', '01915849314', '2', '1', '2022-01-29 11:47:43', '2022-01-29 11:47:43'),
+(83, 'সুফিয়া আক্তার রুমী', 'গবেষণা ও ফেলোশিপ শাখা', '01716307723', 'sufia.akhter@ictd.gov.bd', 'উপসচিব', '01716307723', '2', '1', '2022-01-29 11:49:05', '2022-01-29 11:49:05'),
+(84, 'মোঃ জাকির হোসেন বাচ্চু', 'উদ্ভাবনী ও বিশেষ অনুদান শাখা', '01728366316', 'zakir.hossain@ictd.gov.bd', 'উপসচিব', '01728366316', '2', '1', '2022-01-29 11:50:41', '2022-01-29 11:50:41'),
+(85, 'শাহানারা খানম', 'কর্মসম্পাদন ও কৌশল শাখা', '01680246756', 'shahanara.khanum@ictd.gov.bd', 'সহকারী সচিব', '01680246756', '2', '1', '2022-01-29 11:51:35', '2022-01-29 11:51:35'),
+(86, 'ড. মুহম্মদ মেহেদী হাসান', 'অর্গানাইজেশনাল সাপোর্ট অধিশাখা', '01552476487', 'mehedi@ictd.gov.bd', 'যুগ্মসচিব', '01552476487', '2', '1', '2022-01-29 11:52:56', '2022-01-29 11:52:56'),
+(87, 'মোঃ মাইনুল হক ভূঁইয়া', 'অর্গানাইজেশনাল সাপোর্ট অধিশাখা', '01711385917', 'moynul@ictd.gov.bd', 'উপসচিব', '01711385917', '2', '1', '2022-01-29 11:53:54', '2022-01-29 11:53:54'),
+(88, 'এ.টি.এম. জিয়াউল ইসলাম', 'সংস্থা-১', '01720563929', 'ziaul.islam@ictd.gov.bd', 'উপসচিব', '01720563929', '2', '1', '2022-01-29 11:54:43', '2022-01-29 11:54:43'),
+(89, 'ড. সিরাত মাহমুদা', 'সংস্থা-৩ শাখা', '01790888111', 'sirat.mahmuda@ictd.gov.bd', 'উপসচিব', '01790888111', '2', '1', '2022-01-29 11:56:38', '2022-01-29 11:56:38'),
+(90, 'নূর জাহান', 'সংস্থা-২ শাখা', '01712960636', 'noor.jahan@ictd.gov.bd', 'সহকারী সচিব', '01712960636', '2', '1', '2022-01-29 11:57:42', '2022-01-29 11:57:42'),
+(91, 'মোঃ নবীর উদ্দীন', 'ডিজিটাল গভর্নেন্স ও ইমপ্লিমেন্টেশন অধিশাখা', '01717178030', 'nobir@ictd.gov.bd', 'যুগ্মসসিনিয়র সিস্টেম এনালিস্ট', '01717178030', '2', '1', '2022-01-29 12:01:49', '2022-01-29 12:01:49'),
+(92, 'মোহাম্মদ আনোয়ার হোসেন', 'ডিজিটাল সিকিউরিটি ও অপারেশন অধিশাখা', '01710904099', 'anwar@ictd.gov.bd', 'সিনিয়র মেইন্টেনেন্স ইঞ্জিনিয়ার', '01710904099', '2', '1', '2022-01-29 12:03:01', '2022-01-29 12:03:01'),
+(93, 'মোঃ শরিফুল ইসলাম', 'ডিজিটাল কো-অর্ডিনেশন শাখা এবং ডিজিটাল গভর্নেন্স শাখা', '01721716053', 'shariful@ictd.gov.bd', 'সিস্টেম এনালিস্ট', '01721716053', '2', '1', '2022-01-29 12:04:01', '2022-01-29 12:04:01'),
+(94, 'মুঃ মেসবাহুল আলম', 'ডিজিটাল সিকিউরিটি মনিটরিং ও অপারেশন শাখা এবং ডিজিটাল কো-অপারেশন শাখা', '01719533062', 'mesbah@ictd.gov.bd', 'প্রোগ্রামার', '01719533062', '2', '1', '2022-01-29 12:05:01', '2022-01-29 12:05:01'),
+(95, 'মোঃ নাজমুল হক খন্দকার', 'ই-সার্ভিস ইমপ্লিমেন্টেশন শাখা এবং ডিজিটাল সিকিউরিটি ও স্ট্যান্ডার্ড শাখা', '01739208864', 'nazmul@ictd.gov.bd', 'সহকারী মেইন্টেনেন্স ইঞ্জিনিয়ার', '01739208864', '2', '1', '2022-01-29 12:06:07', '2022-01-29 23:14:40'),
+(96, 'রণজিৎ কুমার', 'আইন ও পলিসি অনুবিভাগ', '01712023304', 'ranajit.kumar@ictd.gov.bd', 'অতিরিক্ত সচিব', '01712023304', '2', '1', '2022-01-29 12:07:27', '2022-01-29 12:07:27'),
+(97, 'মোঃ আমিনুল হক', 'আইন অধিশাখা', '01760941771', 'aminul.hoque@ictd.gov.bd', 'উপসচিব', '01760941771', '2', '1', '2022-01-29 12:08:28', '2022-01-29 12:08:28'),
+(98, 'ড. মোঃ মিজানুর রহমান', 'পলিসি অধিশাখা', '01716231197', 'mizanur.rahman@ictd.gov.bd', 'উপসচিব', '01716231197', '2', '1', '2022-01-29 12:09:23', '2022-01-29 12:09:23'),
+(99, 'রেবেকা সুলতানা', 'পলিসি বাস্তবায়ন শাখা', '01552434553', 'rebeka.sultana@ictd.gov.bd', 'উপসচিব', '01552434553', '2', '1', '2022-01-29 12:12:01', '2022-01-29 12:12:01'),
+(100, 'মোসাঃ রাশিদা আক্তার', 'লিগ্যাল শাখা', '01720983493', 'rashida@ictd.gov.bd', 'সহকারী সচিব', '01720983493', '2', '1', '2022-01-29 12:13:19', '2022-01-29 12:13:19'),
+(102, 'এন এম জিয়াউল আলম পিএএ', 'প্রশাসন অনুবিভাগ', '01708501313', 'secretary@ictd.gov.bd', 'সিনিয়র সচিব', '01708501313', '2', '1', '2022-01-30 03:46:53', '2022-01-30 03:46:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_active` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `oparetor_id` int(10) UNSIGNED DEFAULT NULL,
+  `employee_id` int(10) UNSIGNED DEFAULT NULL,
+  `token` int(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `is_active`, `phone`, `oparetor_id`, `employee_id`, `token`, `created_at`, `updated_at`) VALUES
+(204, 'Superadmin', 'info@leave.ictd.gov.bd', 'Leave@2021', '1', '1', '0000', NULL, NULL, NULL, NULL, NULL),
+(205, 'মোঃ আবদুস সাত্তার সরকার', 'ssarker@ictd.gov.bd', '01550150635', '2', '1', '01550150635', 63, NULL, NULL, NULL, '2022-01-29 11:03:55'),
+(206, 'মোঃ আখতারুজ্জামান', 'akhtaruzzaman@ictd.gov.bd', '01715016422', '2', '1', '01715016422', 64, NULL, NULL, NULL, NULL),
+(207, 'সালমা সিদ্দিকা মাহতাব', 'salma.siddiqa@ictd.gov.bd', '01714448369', '2', '1', '01714448369', 65, NULL, NULL, NULL, NULL),
+(208, 'রাজা মুহম্মদ আব্দুল হাই', 'raza6676@ictd.gov.bd', '01710873246', '2', '1', '01710873246', 66, NULL, NULL, NULL, NULL),
+(209, 'এস এম মুনীর উদ্দিন', 'inter-ministry@ictd.gov.bd', '01712647458', '2', '1', '01712647458', 67, NULL, NULL, NULL, NULL),
+(210, 'মোঃ তবিবুর রহমান', 'logistic@ictd.gov.bd', '01717501023', '2', '1', '01717501023', 68, NULL, NULL, NULL, NULL),
+(211, 'ইসরাত জাহান', 'israt@ictd.gov.bd', '01673299705', '2', '1', '01673299705', 69, NULL, NULL, NULL, NULL),
+(212, 'রায়হানা ইসলাম', 'raihanaislam1976@ictd.gov.bd', '01716639482', '2', '1', '01716639482', 70, NULL, NULL, NULL, NULL),
+(213, 'জাহিদা খাতুন', 'zahida.khatun@ictd.gov.bd', '01552396360', '2', '1', '01552396360', 71, NULL, NULL, NULL, NULL),
+(214, 'মো: জিল্লুর রহমান', 'pstosecretary@ictd.gov.bd', '01727666929', '2', '1', '01727666929', 72, NULL, NULL, NULL, NULL),
+(215, 'মোঃ জাহিদুল ইসলাম', 'zahid@ictd.gov.bd', '01723139358', '2', '1', '01723139358', 73, NULL, NULL, NULL, NULL),
+(216, 'ড. খন্দকার আজিজুল ইসলাম', 'khandokerazizul@ictd.gov.bd', '01711707421', '2', '1', '01711707421', 74, NULL, NULL, NULL, NULL),
+(217, 'মোছাঃ আসপিয়া আকতার', 'aspia.dc@ictd.gov.bd', '01715750827', '2', '1', '01715750827', 75, NULL, NULL, NULL, NULL),
+(218, 'মোঃ মনির হোসেন', 'manir@ictd.gov.bd', '01718670894', '2', '1', '01718670894', 76, NULL, NULL, NULL, NULL),
+(219, 'তওহীদ আহমদ সজল', 'towhid.sajal@ictd.gov.bd', '01716976767', '2', '1', '01716976767', 77, NULL, NULL, NULL, NULL),
+(220, 'রোজিনা আক্তার', 'rozina.akther@ictd.gov.bd', '01714633449', '2', '1', '01714633449', 78, NULL, NULL, NULL, NULL),
+(221, 'ফারজানা ইয়াসমিন', 'farzana@ictd.gov.bd', '01746601192', '2', '1', '01746601192', 79, NULL, NULL, NULL, NULL),
+(222, 'নাহিদ সুলতানা মল্লিক', 'nahidshami@ictd.gov.bd', '01711101766', '2', '1', '01711101766', 80, NULL, NULL, NULL, NULL),
+(223, 'মোহাম্মদ নজরুল ইসলাম', 'nazrul.islam@ictd.gov.bd', '01731650229', '2', '1', '01731650229', 81, NULL, NULL, NULL, NULL),
+(224, 'এস এম শফিক', 's.safiq@ictd.gov.bd', '01915849314', '2', '1', '01915849314', 82, NULL, NULL, NULL, NULL),
+(225, 'সুফিয়া আক্তার রুমী', 'sufia.akhter@ictd.gov.bd', '01716307723', '2', '1', '01716307723', 83, NULL, NULL, NULL, NULL),
+(226, 'মোঃ জাকির হোসেন বাচ্চু', 'zakir.hossain@ictd.gov.bd', '01728366316', '2', '1', '01728366316', 84, NULL, NULL, NULL, NULL),
+(227, 'শাহানারা খানম', 'shahanara.khanum@ictd.gov.bd', '01680246756', '2', '1', '01680246756', 85, NULL, NULL, NULL, NULL),
+(228, 'ড. মুহম্মদ মেহেদী হাসান', 'mehedi@ictd.gov.bd', '01552476487', '2', '1', '01552476487', 86, NULL, NULL, NULL, NULL),
+(229, 'মোঃ মাইনুল হক ভূঁইয়া', 'moynul@ictd.gov.bd', '01711385917', '2', '1', '01711385917', 87, NULL, NULL, NULL, NULL),
+(230, 'এ.টি.এম. জিয়াউল ইসলাম', 'ziaul.islam@ictd.gov.bd', '01720563929', '2', '1', '01720563929', 88, NULL, NULL, NULL, NULL),
+(231, 'ড. সিরাত মাহমুদা', 'sirat.mahmuda@ictd.gov.bd', '01790888111', '2', '1', '01790888111', 89, NULL, NULL, NULL, NULL),
+(232, 'নূর জাহান', 'noor.jahan@ictd.gov.bd', '01712960636', '2', '1', '01712960636', 90, NULL, NULL, NULL, NULL),
+(233, 'মোঃ নবীর উদ্দীন', 'nobir@ictd.gov.bd', '01717178030', '2', '1', '01717178030', 91, NULL, NULL, NULL, NULL),
+(234, 'মোহাম্মদ আনোয়ার হোসেন', 'anwar@ictd.gov.bd', '01710904099', '2', '1', '01710904099', 92, NULL, NULL, NULL, NULL),
+(235, 'মোঃ শরিফুল ইসলাম', 'shariful@ictd.gov.bd', '01721716053', '2', '1', '01721716053', 93, NULL, NULL, NULL, NULL),
+(236, 'মুঃ মেসবাহুল আলম', 'mesbah@ictd.gov.bd', '01719533062', '2', '1', '01719533062', 94, NULL, NULL, NULL, NULL),
+(237, 'মোঃ নাজমুল হক খন্দকার', 'nazmul@ictd.gov.bd', '01739208864', '2', '1', '01739208864', 95, NULL, NULL, NULL, '2022-01-29 23:14:40'),
+(238, 'রণজিৎ কুমার', 'ranajit.kumar@ictd.gov.bd', '01712023304', '2', '1', '01712023304', 96, NULL, NULL, NULL, NULL),
+(239, 'মোঃ আমিনুল হক', 'aminul.hoque@ictd.gov.bd', '01760941771', '2', '1', '01760941771', 97, NULL, NULL, NULL, NULL),
+(240, 'ড. মোঃ মিজানুর রহমান', 'mizanur.rahman@ictd.gov.bd', '01716231197', '2', '1', '01716231197', 98, NULL, NULL, NULL, NULL),
+(241, 'রেবেকা সুলতানা', 'rebeka.sultana@ictd.gov.bd', '01552434553', '2', '1', '01552434553', 99, NULL, NULL, NULL, NULL),
+(242, 'মোসাঃ রাশিদা আক্তার', 'rashida@ictd.gov.bd', '01720983493', '2', '1', '01720983493', 100, NULL, NULL, NULL, NULL),
+(243, 'মোঃ আব্দুর রহিম', 'abdur.rahim@ictd.gov.bd', '01722575970', '3', '1', '01722575970', NULL, 154, NULL, NULL, NULL),
+(244, 'তাছলিমা আক্তার', 'taslima.akter@ictd.gov.bd', '01921215800', '3', '1', '01921215800', NULL, 155, NULL, NULL, NULL),
+(245, 'মোঃ হানিফ', 'md.hanif@ictd.gov.bd', '01816720172', '3', '1', '01816720172', NULL, 156, NULL, NULL, NULL),
+(246, 'মোঃ শরিফুল ইসলাম', 'shoriful.islam@ictd.gov.bd', '01922275654', '3', '1', '01922275654', NULL, 157, NULL, NULL, NULL),
+(247, 'চায়না আক্তার', 'china.aktar@ictd.gov.bd', '01923410711', '3', '1', '01923410711', NULL, 158, NULL, NULL, NULL),
+(248, 'মোঃ নুর হোসেন পারভেজ', 'nur.parvez@ictd.gov.bd', '01823210262', '3', '1', '01823210262', NULL, 159, NULL, NULL, NULL),
+(249, 'ভোলানাথ ত্রিপুরা', 'bholanath@ictd.gov.bd', '01556774213', '3', '1', '01556774213', NULL, 160, NULL, NULL, NULL),
+(250, 'মোঃ রাশেদুর রহমান', 'rashedur.rahman@ictd.gov.bd', '01712046524', '3', '1', '01712046524', NULL, 161, NULL, NULL, NULL),
+(251, 'মোহাম্মদ শফিকুল ইসলাম খান', 'mohammad.shofiqul@ictd.gov.bd', '01536100337', '3', '1', '01536100337', NULL, 162, NULL, NULL, NULL),
+(252, 'জাহিদ আল সিদ্দিকী', 'zahid.siddique@ictd.gov.bd', '01517263851', '3', '1', '01517263851', NULL, 163, NULL, NULL, NULL),
+(253, 'মোঃ মিনহাজ হোসেন', 'minhaj.hossain@ictd.gov.bd', '01760407187', '3', '1', '01760407187', NULL, 164, NULL, NULL, NULL),
+(254, 'নুছরাত জাহান', 'nusrat.jahan@ictd.gov.bd', '01701799541', '3', '1', '01701799541', NULL, 165, NULL, NULL, NULL),
+(255, 'ইসরাত অনামিকা', 'israt.anamica@ictd.gov.bd', '01515298562', '3', '1', '01515298562', NULL, 166, NULL, NULL, NULL),
+(256, 'ফখর উদ্দীন আহমেদ', 'fakar.ahamed@ictd.gov.bd', '01670688668', '3', '1', '01670688668', NULL, 167, NULL, NULL, NULL),
+(257, 'ফরিদা আক্তার মিষ্টি', 'farida.misty@ictd.gov.bd', '01684913229', '3', '1', '01684913229', NULL, 168, NULL, NULL, NULL),
+(258, 'আহম্মেদ আলী', 'ahmmed.ali@ictd.gov.bd', '01710795768', '3', '1', '01710795768', NULL, 169, NULL, NULL, NULL),
+(259, 'মো: হযরত আলী', 'hazrat.ali@ictd.gov.bd', '01743958644', '3', '1', '01743958644', NULL, 170, NULL, NULL, NULL),
+(260, 'মো: সফিকুল ইসলাম', 'sofiqul.islam@ictd.gov.bd', '01682953737', '3', '1', '01682953737', NULL, 171, NULL, NULL, NULL),
+(261, 'ট্রেডওয়েব', 'mmhp99bd@gmail.com', '01645119770', '2', '1', '01645119770', 101, NULL, NULL, NULL, '2022-01-29 13:41:16'),
+(262, 'মেজবাহ', 'mesbaalam90@gmail.com', '01521119051', '3', '1', '01521119051', NULL, 172, NULL, NULL, NULL),
+(263, 'এন এম জিয়াউল আলম পিএএ', 'secretary@ictd.gov.bd', '01708501313', '2', '1', '01708501313', 102, NULL, NULL, NULL, NULL);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `applications`
+--
+ALTER TABLE `applications`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `employees`
+--
+ALTER TABLE `employees`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `employees_email_unique` (`email`);
+
+--
+-- Indexes for table `logins`
+--
+ALTER TABLE `logins`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `oparetors`
+--
+ALTER TABLE `oparetors`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `oparetors_email_unique` (`email`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `applications`
+--
+ALTER TABLE `applications`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- AUTO_INCREMENT for table `employees`
+--
+ALTER TABLE `employees`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
+
+--
+-- AUTO_INCREMENT for table `logins`
+--
+ALTER TABLE `logins`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `oparetors`
+--
+ALTER TABLE `oparetors`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=264;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

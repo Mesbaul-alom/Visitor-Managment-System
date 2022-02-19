@@ -1,0 +1,85 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\OparetorController;
+use App\Http\Controllers\EmployeeController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('auth.login');
+});
+
+ Auth::routes();
+
+ Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('superadmin/home', [HomeController::class, 'SuperadminHome'])->name('superadmin.home')->middleware('is_super');
+Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
+Route::get('oparetor/home', [HomeController::class, 'OparetorHome'])->name('oparetor.home')->middleware('is_oparetor');
+Route::get('employee/home', [HomeController::class, 'EmployeeHome'])->name('employee.home')->middleware('is_employee');
+// Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
+Route::group(['middleware'=>['is_super']] , function(){
+    // add organization view page route
+Route::get('add/organization', [OrganizationController::class, 'AddOrganization'])->name('add.organization');
+// store organization route
+Route::post('store/organization', [OrganizationController::class, 'StoreOrganization'])->name('store.organization');
+// organization list
+Route::get('organization/list', [OrganizationController::class, 'OrganizationList'])->name('organization.list');
+// organization admin list
+Route::get('organization/admin/list', [OrganizationController::class, 'OrganizationAdminList'])->name('organization.admin.list');
+Route::post('/admin/organization/add', [AdminController::class, 'OrganizationAdminAdd'])->name('organization.admin.add');
+// organization details
+Route::get('/details/organization/{id}', [OrganizationController::class, 'OrganizationDeatils'])->name('organization.details');
+// organization edit
+Route::get('/organization/edit/{id}', [OrganizationController::class, 'OrganizationEdit'])->name('organization.edit');
+// organization edit
+Route::post('/organization/update/{id}', [OrganizationController::class, 'OrganizationUpdate'])->name('organization.update');
+// organization delete
+Route::delete('/organization/delete/{id}', [OrganizationController::class, 'OrganizationDelete'])->name('organization.delete');
+// admnorganization delete
+Route::delete('/delete/admin/organization/{id}', [OrganizationController::class, 'OrganizationAdminDelete'])->name('organization.admin.delete');
+
+});
+
+Route::group(['middleware'=>['is_admin']] , function(){
+
+    Route::get('branch/list', [BranchController::class, 'BranchList'])->name('branch.list');
+    Route::get('department/list', [BranchController::class, 'DepartmentList'])->name('department.list');
+    Route::get('oparetor/list', [OparetorController::class, 'OpaetorList'])->name('oparetor.list');
+    Route::post('/branch/add', [BranchController::class, 'BranchAdd'])->name('branch.add');
+    Route::post('/department/add', [BranchController::class, 'DepartmentAdd'])->name('department.add');
+    Route::post('/oparetor/branch/add', [OparetorController::class, 'BranchOparetorAdd'])->name('branch.oparetor.add');
+});
+Route::group(['middleware'=>['is_oparetor']] , function(){
+
+    Route::get('employee/list', [EmployeeController::class, 'Employeelist'])->name('employee.list');
+    Route::post('/employee/branch/add', [EmployeeController::class, 'BranchemployeeAdd'])->name('branch.employee.add');
+
+    Route::get('recep/list', [EmployeeController::class, 'Receplist'])->name('recep.list');
+    Route::post('/recep/branch/add', [EmployeeController::class, 'BranchRecepAdd'])->name('branch.recep.add');
+
+});
+Route::group(['middleware'=>['is_employee']] , function(){
+
+    Route::get('visitor/list', [EmployeeController::class, 'Visiroelist'])->name('visitor.list');
+    Route::get('pending/visitor/list', [EmployeeController::class, 'PendingVisiroelist'])->name('pending.visitor.list');
+    Route::get('/visitor/add', [EmployeeController::class, 'VisitorAdd'])->name('visitor.add');
+    Route::post('/visitor/store', [EmployeeController::class, 'VisitorStore'])->name('visitor.store');
+    Route::get('/view/visitor/{id}', [EmployeeController::class, 'VisitorView'])->name('visitor.view');
+    // Route::post('/employee/branch/add', [EmployeeController::class, 'BranchemployeeAdd'])->name('branch.employee.add');
+
+});
+
