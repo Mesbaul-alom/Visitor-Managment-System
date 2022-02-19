@@ -19,7 +19,10 @@
                                <a href="/visitor/add" class="btn btn-success">Insert</a>
                             </div>
                             <h4 class="header-title">Visitors List</h4>
-                           
+                           <center>
+                               <h3>Id Card:</h3>
+                               <input type="search">
+                           </center>
 
                             <table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
@@ -27,7 +30,7 @@
                                         <th>Name</th>
                                         <th>Phone</th>
                                         <th>Email</th>
-                                        <th>Status</th>
+                                        {{-- <th>Status</th> --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -40,14 +43,14 @@
                                         <td>{{$admin->name}}</td>
                                         <td>{{$admin->phone}}</td>
                                         <td>{{$admin->email}}</td>
-                                        @if ($admin->is_active == 1)
+                                        {{-- @if ($admin->is_active == 1)
                                         <td > <span class="btn btn-primary">Active</span> </td>
                                         @else
                                            <td>Diactive</td>
-                                        @endif
+                                        @endif --}}
 
                                         <td>
-                                     <a href="/edit/organization/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                     <a href="/view/visitor/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                      <a href="/edit/organization/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                     <a href="/delete/admin/organization/{{$admin->id}}" class="btn btn-danger" id="delete"><i class="fas fa-trash-alt"></i></a>
                                    

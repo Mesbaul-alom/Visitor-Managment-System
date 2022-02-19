@@ -64,6 +64,18 @@
                             <div class="table-responsive">
                                 <table class="table table-nowrap mb-0">
                                     <tbody>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>{{$visitors->name}}</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Phone</th>
+                                            <th>{{$visitors->phone}}</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Email</th>
+                                            <th>{{$visitors->email}}</th>
+                                        </tr>
                                        
                                     </tbody>
                                 </table>
@@ -73,6 +85,53 @@
        
 
 </div>
+<hr>
+<table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Action</th>
+
+            @if ($visitors->approve == 1 || $visitors->approve == null)
+            <th>Approve By</th>
+            @endif
+            @if ($visitors->approve == 2)
+            <th>Rejected By</th>
+            @endif
+        </tr>
+    </thead>
+
+
+    <tbody>
+       
+      
+        <tr>
+            <td>{{$visitors->name}}</td>
+            <td>{{$visitors->phone}}</td>
+            <td>{{$visitors->email}}</td>
+            <td>
+                @if ($visitors->approve == null)
+                <a href="/approve/visitor/{{$visitors->id}}" class="btn btn-primary">Aprrove</a>
+                <a href="/reject/visitor/{{$visitors->id}}" class="btn btn-danger">Reject</a>
+                @endif
+                @if ($visitors->approve == 1)
+               
+                <a href="/reject/visitor/{{$visitors->id}}" class="btn btn-danger">Reject</a>
+                @endif
+                @if ($visitors->approve == 2)
+                <a href="/approve/visitor/{{$visitors->id}}" class="btn btn-primary">Aprrove</a>
+            
+                @endif
+        
+        
+            </td>
+            <td>{{$visitors->approve_by	}}</td>
+        </tr>
+      
+    </tbody>
+</table>
             </div>
         </div>
     </div>

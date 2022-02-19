@@ -75,7 +75,13 @@
           <form method="POST" action="{{url('/department/add')}}"   class="parsley-examples" enctype="multipart/form-data">
             @csrf
            
-         
+            <div class="mb-3">
+                <label for="name" class="form-label">Name<span class="text-danger">*</span></label>
+                <input type="name" name="name" parsley-trigger="change" value="{{old('name')}}" class="form-control" id="name" />
+                @if($errors->has('name'))
+                <div style="color:red"> {{$errors->first('name')}}</div>
+                @endif
+            </div>
             <div class="mb-3">
                 <label for="branch" class="form-label">Branch<span class="text-danger">*</span></label>
                 <select name="branch" id="branch" class="form-control" >
@@ -86,13 +92,7 @@
                 </select>
                 
             </div>
-            <div class="mb-3">
-                <label for="name" class="form-label">Name<span class="text-danger">*</span></label>
-                <input type="name" name="name" parsley-trigger="change" value="{{old('name')}}" class="form-control" id="name" />
-                @if($errors->has('name'))
-                <div style="color:red"> {{$errors->first('name')}}</div>
-                @endif
-            </div>
+           
            
 
           

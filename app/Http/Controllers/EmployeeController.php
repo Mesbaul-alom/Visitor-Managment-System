@@ -171,5 +171,33 @@ public function VisitorView($id){
     return view('employee.visitorView',compact('visitors'));
 
 }
+public function VisitorApprove($id){
+    $name= auth()->user()->name;
+    $visitors=Visitor::find($id);
+    $visitors->approve=1;
+    $visitors->approve_by	= $name;
+    $visitors->save();
+    $notification = array(
+        'message' => 'Visitor Approve Done',
+        'alert-type' => 'success',
+    );
+   
+    return redirect()->back()->with($notification); 
+
+}
+public function VisitorReject($id){
+    $name= auth()->user()->name;
+    $visitors=Visitor::find($id);
+    $visitors->approve=2;
+    $visitors->approve_by	= $name;
+    $visitors->save();
+    $notification = array(
+        'message' => 'Visitor Reject Done',
+        'alert-type' => 'success',
+    );
+   
+    return redirect()->back()->with($notification);
+
+}
 
 }

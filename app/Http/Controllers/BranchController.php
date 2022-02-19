@@ -14,12 +14,14 @@ use Illuminate\Http\Request;
 class BranchController extends Controller
 {
    public function  BranchList(){
-       $branchs=Branch::all();
+    $id= auth()->id();
+       $branchs=Branch::where('organization_id',$id)->get();
        return view('admin.branchlist',compact('branchs'));
    }
    public function  DepartmentList(){
        $departments=Department::all();
-       $branchs=Branch::all();
+       $id= auth()->id();
+       $branchs=Branch::where('organization_id',$id)->get();
        return view('admin.departmentslist',compact('departments','branchs'));
    }
  

@@ -79,6 +79,8 @@ Route::group(['middleware'=>['is_employee']] , function(){
     Route::get('/visitor/add', [EmployeeController::class, 'VisitorAdd'])->name('visitor.add');
     Route::post('/visitor/store', [EmployeeController::class, 'VisitorStore'])->name('visitor.store');
     Route::get('/view/visitor/{id}', [EmployeeController::class, 'VisitorView'])->name('visitor.view');
+    Route::get('/approve/visitor/{id}', [EmployeeController::class, 'VisitorApprove'])->name('visitor.approve');
+    Route::get('/reject/visitor/{id}', [EmployeeController::class, 'VisitorReject'])->name('visitor.reject');
     // Route::post('/employee/branch/add', [EmployeeController::class, 'BranchemployeeAdd'])->name('branch.employee.add');
 
 });

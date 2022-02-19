@@ -13,7 +13,8 @@ class OparetorController extends Controller
 {
     public function  OpaetorList(){
         $oparetors=Oparetor::all();
-        $branchs=Branch::all();
+        $id= auth()->id();
+       $branchs=Branch::where('organization_id',$id)->get();
         return view('oparetor.oparetorlist',compact('oparetors','branchs'));
     }
 

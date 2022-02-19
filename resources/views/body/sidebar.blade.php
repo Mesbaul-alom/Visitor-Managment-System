@@ -90,22 +90,22 @@
                              
                                    Assign Oparetor</a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="{{ route('employee.list') }}">
                                    Employee List</a>
-                            </li>
+                            </li> --}}
                             
                            
                         </ul>
                     </div>
                 </li>
                 <li>
-                    <a href="#sidebar2" data-bs-toggle="collapse">
+                    <a href="#sidebar3" data-bs-toggle="collapse">
                         <i class="fas fa-user"></i>
                         <span> Department </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebar2">
+                    <div class="collapse" id="sidebar3">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('department.list') }}">
@@ -201,7 +201,59 @@
                                    Visitor List</a>
                             </li>
 
+                            <li>
+                                <a href="{{ route('pending.visitor.list') }}">
+                                 pre  Visitor List</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('pending.visitor.list') }}">
+                                   Visiting History</a>
+                            </li>
+                            
                            
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#sidebar3" data-bs-toggle="collapse">
+                        <i class="fas fa-user"></i>
+                        <span> Locar </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebar3">
+                        <ul class="nav-second-level">
+                           
+
+                            <li>
+                                <a href="{{ route('pending.visitor.list') }}">
+                                 Locar</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('pending.visitor.list') }}">
+                                 Id Card</a>
+                            </li>
+                           
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#sidebar4" data-bs-toggle="collapse">
+                        <i class="fas fa-user"></i>
+                        <span> Employee </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebar4">
+                        <ul class="nav-second-level">
+                           
+
+                            <li>
+                                <a href="{{ route('pending.visitor.list') }}">
+                                 Parmanent Employee</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('pending.visitor.list') }}">
+                                 Temp Employee</a>
+                            </li>
                            
                         </ul>
                     </div>
@@ -242,6 +294,24 @@
                                 <a href="{{ route('pending.visitor.list') }}">
                                    Visitor List</a>
                             </li>
+                            <li>
+                                <a href="{{ route('pending.visitor.list') }}">
+                                   Pending Visitor List</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('pending.visitor.list') }}">
+                                Approved   Visitor List</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('pending.visitor.list') }}">
+                                Rejected   Visitor List</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('pending.visitor.list') }}">
+                               Pre Registration Visitor</a>
+                            </li>
+                        <ul class="nav-second-level">
+                           
 
                            
                            
@@ -249,7 +319,24 @@
                     </div>
                 </li>
           
-                   
+                <li>
+                    <a href="#sidebar3" data-bs-toggle="collapse">
+                        <i class="fas fa-user"></i>
+                        <span> Parcel Managment </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebar3">
+                        <ul class="nav-second-level">
+                            
+                        <ul class="nav-second-level">
+                           
+
+                           
+                           
+                        </ul>
+                    </div>
+                </li>
+           
                
               
                 </li>

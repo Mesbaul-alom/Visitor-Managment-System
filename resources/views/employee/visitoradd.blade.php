@@ -13,6 +13,8 @@
 
             <div class="row" style="padding-top: 50px">
                 <div class="col-12">
+                    <h3>Search Pre Visited</h3>
+                    <input type="search" class="form-control" placeholder="visitor if pre visited">
                     <div class="card">
                         <form action="{{ route('visitor.store') }}" method="POST" enctype="multipart/form-data">
                         <div class="card-body">
