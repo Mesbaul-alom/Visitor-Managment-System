@@ -75,12 +75,19 @@ Route::group(['middleware'=>['is_oparetor']] , function(){
 Route::group(['middleware'=>['is_employee']] , function(){
 
     Route::get('visitor/list', [EmployeeController::class, 'Visiroelist'])->name('visitor.list');
+    Route::get('all/visitor/list', [EmployeeController::class, 'AllVisiroelist'])->name('all.visitor.list');
     Route::get('pending/visitor/list', [EmployeeController::class, 'PendingVisiroelist'])->name('pending.visitor.list');
+    Route::get('history/visitor/list', [EmployeeController::class, 'HistoryVisiroelist'])->name('history.visitor.list');
+    Route::get('parmanent/employee/list', [EmployeeController::class, 'ParmanentEmployeeList'])->name('parmanent.employee.list');
+    Route::get('approve/visitor/list', [EmployeeController::class, 'ApproveVisiroelist'])->name('approve.visitor.list');
+    Route::get('rejected/visitor/list', [EmployeeController::class, 'RejectedVisiroelist'])->name('rejected.visitor.list');
     Route::get('/visitor/add', [EmployeeController::class, 'VisitorAdd'])->name('visitor.add');
     Route::post('/visitor/store', [EmployeeController::class, 'VisitorStore'])->name('visitor.store');
     Route::get('/view/visitor/{id}', [EmployeeController::class, 'VisitorView'])->name('visitor.view');
+    Route::get('/details/visitor/{id}', [EmployeeController::class, 'detailsView'])->name('visitor.details');
     Route::get('/approve/visitor/{id}', [EmployeeController::class, 'VisitorApprove'])->name('visitor.approve');
     Route::get('/reject/visitor/{id}', [EmployeeController::class, 'VisitorReject'])->name('visitor.reject');
+    Route::get('/visitor/checkout/{id}', [EmployeeController::class, 'VisitorCheckOut'])->name('visitor.checkout');
     // Route::post('/employee/branch/add', [EmployeeController::class, 'BranchemployeeAdd'])->name('branch.employee.add');
 
 });

@@ -16,7 +16,9 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="text-end">
+                                @if (auth()->user()->is_admin == 2 || auth()->user()->is_admin == 3)
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Create</button>
+                           @endif
                             </div>
                             <h4 class="header-title">Employee List</h4>
                            
@@ -32,8 +34,6 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-
-
                                 <tbody>
                                    
                                     @foreach($employees as $admin)
@@ -49,9 +49,11 @@
                                         @endif
 
                                         <td>
+                                            <a href="/edit/organization/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                            @if (auth()->user()->is_admin == 2 || auth()->user()->is_admin == 3)
                                      <a href="/edit/organization/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                     <a href="/delete/admin/organization/{{$admin->id}}" class="btn btn-danger" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                   
+                                   @endif
                                         </td>
                                     </tr>
                                     @endforeach

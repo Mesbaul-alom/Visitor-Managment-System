@@ -198,7 +198,7 @@ a.ssolink {
     margin: 0 10px;
 }
 
-.animationRightLeft {
+/* .animationRightLeft {
   animation: animationRightLeft 2s ease-in-out infinite;
 }
 .animationLeftRight {
@@ -233,7 +233,7 @@ a.ssolink {
   100% {
     transform: translateX(0px);
   }
-} 
+}  */
 </style>
 @section('content')
 <div class="login-root">
@@ -277,7 +277,10 @@ a.ssolink {
         <div class="formbg-outer">
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
-              <span class="padding-bottom--15">Sign in to your account</span>
+              <center>
+                <span class="padding-bottom--15">Sign in to your account</span>
+              </center>
+              
               <div class="card-body">
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
@@ -311,19 +314,23 @@ a.ssolink {
                     </div>
 
                     <div class="row mb-3">
-                        <div class="col-md-6 offset-md-4">
+                        <div class="col-md-6 ">
+                          <center>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                <label class="form-check-label" for="remember">
+                                
+                                  <label class="form-check-label" for="remember">
                                     {{ __('Remember Me') }}
                                 </label>
+                                
                             </div>
+                          </center>
                         </div>
                     </div>
 
-                    <div class="row mb-0">
-                        <div class="col-md-8 offset-md-4">
+                    <div class="row ">
+                       <center> <div class="col-md-8 ">
                             <button type="submit" class="btn btn-primary">
                                 {{ __('Login') }}
                             </button>
@@ -333,7 +340,7 @@ a.ssolink {
                                     {{ __('Forgot Your Password?') }}
                                 </a>
                             @endif
-                        </div>
+                        </div></center>
                     </div>
                 </form>
             </div>

@@ -66,15 +66,15 @@
                                     <tbody>
                                         <tr>
                                             <th>Name</th>
-                                            <th>{{$visitors->name}}</th>
+                                            <th>{{$vuser->name}}</th>
                                         </tr>
                                         <tr>
                                             <th>Phone</th>
-                                            <th>{{$visitors->phone}}</th>
+                                            <th>{{$vuser->phone}}</th>
                                         </tr>
                                         <tr>
                                             <th>Email</th>
-                                            <th>{{$visitors->email}}</th>
+                                            <th>{{$vuser->email}}</th>
                                         </tr>
                                        
                                     </tbody>
@@ -92,25 +92,32 @@
             <th>Name</th>
             <th>Phone</th>
             <th>Email</th>
+            {{-- @if ($visitors->checkoutfinal == 0) --}}
             <th>Action</th>
-
-            @if ($visitors->approve == 1 || $visitors->approve == null)
+           {{-- @endif
+            @if ($visitors->approve == 1 || $visitors->approve == null) --}}
             <th>Approve By</th>
-            @endif
+            {{-- @endif
             @if ($visitors->approve == 2)
             <th>Rejected By</th>
-            @endif
+            @endif --}}
+            <th>Check Out</th>
         </tr>
     </thead>
 
 
     <tbody>
-       
+       @foreach ($visitorss as $visitors)
+           
+     
       
         <tr>
             <td>{{$visitors->name}}</td>
             <td>{{$visitors->phone}}</td>
             <td>{{$visitors->email}}</td>
+            @if ($visitors->checkoutfinal == 0)
+                
+        
             <td>
                 @if ($visitors->approve == null)
                 <a href="/approve/visitor/{{$visitors->id}}" class="btn btn-primary">Aprrove</a>
@@ -127,8 +134,23 @@
         
         
             </td>
+            @else
+            <td>
+              Not Avaiable
+        
+        
+            </td>
+            @endif
             <td>{{$visitors->approve_by	}}</td>
+            <td>
+                @if ($visitors->checkoutfinal == 0)
+            <a href="/visitor/checkout/{{$visitors->id}}" class="btn btn-danger" id="checkout">Check Out</a>
+            @else
+            <a class="btn btn-danger" >Already Check Out</a>
+            @endif
+        </td>
         </tr>
+        @endforeach
       
     </tbody>
 </table>
@@ -136,5 +158,32 @@
         </div>
     </div>
  </div>
- 
+ <script>
+    $(function(){
+      $(document).on('click','#checkout',function(e){
+          e.preventDefault();
+          var link = $(this).attr("href");
+                    Swal.fire({
+                    width: 400,
+                    padding: '3em',
+                    customClass: 'swal-height',
+                    title: 'Are you sure?',
+                    icon: 'error',
+                      showCancelButton: false,
+                      confirmButtonColor: '#3085D6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Yes, Checkout Now!'
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        window.location.href = link
+                        Swal.fire(
+                          'Checkout!',
+                          'Visitor Checkout.',
+                          'success'
+                        )
+                      }
+                    })
+      });
+    });
+  </script>
 @endsection

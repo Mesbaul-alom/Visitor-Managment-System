@@ -40,8 +40,8 @@
                                             <div class="col-md-4">
                                                 <label for="">Gender</label>
                                                 <select name="gender[]" id="" class="form-control">
-                                                    <option value="">Male</option>
-                                                    <option value="">Female</option>
+                                                    <option >Male</option>
+                                                    <option>Female</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-3">
@@ -61,7 +61,13 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="">department</label>
-                                                <input name="department[]" type="text" class="form-control">
+                                                <select name="department[]" class="form-control" id="">
+                                                    <option selected disabled>Select Department</option>
+                                                    @foreach ($deparments as $deparment)
+                                                    <option value="{{$deparment->id}}">{{$deparment->name}}</option>  
+                                                    @endforeach
+                                                </select>
+                                             
                                             </div>
                                         </div>
                                         <div class="row">

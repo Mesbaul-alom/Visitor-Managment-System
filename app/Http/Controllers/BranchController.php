@@ -8,6 +8,7 @@ use App\Models\Branch;
 use App\Models\User;
 use App\Models\Department;
 use App\Models\Oparetor;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 
 
@@ -45,10 +46,14 @@ class BranchController extends Controller
    }
      public function DepartmentAdd(Request $request)
    {
+    $id= auth()->id();
+    $admin=User::where('admin_id',$id)->get();
+    $organization=Admin::Were('id',$admin)->pluck('organization')->get();
     $branch= new Department();
     $branch->name=$request->name;
     $branch->branch_id=$request->branch;
     $branch->is_active=1;
+    $branch->organization_id=$organization;
     $branch->save();
     $notification = array(
         'message' => 'Department Added Sucessyfuly',

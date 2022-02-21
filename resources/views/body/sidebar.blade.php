@@ -206,7 +206,7 @@
                                  pre  Visitor List</a>
                             </li>
                             <li>
-                                <a href="{{ route('pending.visitor.list') }}">
+                                <a href="{{ route('history.visitor.list') }}">
                                    Visiting History</a>
                             </li>
                             
@@ -247,7 +247,7 @@
                            
 
                             <li>
-                                <a href="{{ route('pending.visitor.list') }}">
+                                <a href="{{ route('parmanent.employee.list') }}">
                                  Parmanent Employee</a>
                             </li>
                             <li>
@@ -291,7 +291,7 @@
                     <div class="collapse" id="sidebar2">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('pending.visitor.list') }}">
+                                <a href="{{ route('all.visitor.list') }}">
                                    Visitor List</a>
                             </li>
                             <li>
@@ -299,11 +299,11 @@
                                    Pending Visitor List</a>
                             </li>
                             <li>
-                                <a href="{{ route('pending.visitor.list') }}">
+                                <a href="{{ route('approve.visitor.list') }}">
                                 Approved   Visitor List</a>
                             </li>
                             <li>
-                                <a href="{{ route('pending.visitor.list') }}">
+                                <a href="{{ route('rejected.visitor.list') }}">
                                 Rejected   Visitor List</a>
                             </li>
                             <li>

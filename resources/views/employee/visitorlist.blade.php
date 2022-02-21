@@ -16,7 +16,9 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="text-end">
+                            
                                <a href="/visitor/add" class="btn btn-success">Insert</a>
+                      
                             </div>
                             <h4 class="header-title">Visitors List</h4>
                            <center>
@@ -30,7 +32,7 @@
                                         <th>Name</th>
                                         <th>Phone</th>
                                         <th>Email</th>
-                                        {{-- <th>Status</th> --}}
+                                        <th>V_id</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -43,6 +45,7 @@
                                         <td>{{$admin->name}}</td>
                                         <td>{{$admin->phone}}</td>
                                         <td>{{$admin->email}}</td>
+                                        <td>{{$admin->v_id}}</td>
                                         {{-- @if ($admin->is_active == 1)
                                         <td > <span class="btn btn-primary">Active</span> </td>
                                         @else

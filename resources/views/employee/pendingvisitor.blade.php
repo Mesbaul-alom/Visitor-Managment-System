@@ -37,7 +37,7 @@
                                         <td>{{$admin->phone}}</td>
                                         <td>{{$admin->email}}</td>
                                         <td>
-                                     <a href="/view/visitor/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                     <a href="/details/visitor/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                     
                                         </td>
                                     </tr>
