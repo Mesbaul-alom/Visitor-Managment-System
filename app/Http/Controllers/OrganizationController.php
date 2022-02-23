@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Organization;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Branch;
+use App\Models\Department;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -66,7 +68,10 @@ class OrganizationController extends Controller
 public function OrganizationDeatils( $id)
 {
    $organizations=Organization::find($id);
-    return view('superadmin.organizationdetails',compact('organizations'));
+   $branch=Branch::Where('organization_id',$id)->count();
+ 
+
+    return view('superadmin.organizationdetails',compact('organizations','branch'));
 }
 // organization delete funtion
 

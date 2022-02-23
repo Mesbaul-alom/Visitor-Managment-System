@@ -302,5 +302,26 @@ return redirect()->back()->with($notification);
 
 
 }
+public function EmployeeDetails($id){
+    $vuser=Employee::find($id);
+   
+    
+    return view('employee.employeedetails',compact('vuser'));
+ 
+}
+public function EmployeeDelete($id){
+    Employee::destroy($id);
+   
+    
+    $notification = array(
+        'message' => 'Employee Delete Done',
+        'alert-type' => 'success',
+    );
+    
+    return redirect()->back()->with($notification);
+    
+
+}
+ 
 
 }

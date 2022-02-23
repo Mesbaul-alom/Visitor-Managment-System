@@ -21,10 +21,10 @@
                       
                             </div>
                             <h4 class="header-title">Visitors List</h4>
-                           <center>
+                           {{-- <center>
                                <h3>Id Card:</h3>
                                <input type="search">
-                           </center>
+                           </center> --}}
 
                             <table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>

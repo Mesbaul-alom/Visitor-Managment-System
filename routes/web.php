@@ -31,6 +31,9 @@ Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home
 Route::get('oparetor/home', [HomeController::class, 'OparetorHome'])->name('oparetor.home')->middleware('is_oparetor');
 Route::get('employee/home', [HomeController::class, 'EmployeeHome'])->name('employee.home')->middleware('is_employee');
 // Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
+Route::get('/employee/details/{id}', [EmployeeController::class, 'EmployeeDetails'])->name('employee.details');
+Route::get('/delete/employee/{id}', [EmployeeController::class, 'EmployeeDelete'])->name('employee.delete');
+
 Route::group(['middleware'=>['is_super']] , function(){
     // add organization view page route
 Route::get('add/organization', [OrganizationController::class, 'AddOrganization'])->name('add.organization');

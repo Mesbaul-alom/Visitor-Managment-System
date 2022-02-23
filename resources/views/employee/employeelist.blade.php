@@ -49,10 +49,10 @@
                                         @endif
 
                                         <td>
-                                            <a href="/edit/organization/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                            <a href="/employee/details/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                             @if (auth()->user()->is_admin == 2 || auth()->user()->is_admin == 3)
                                      <a href="/edit/organization/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                    <a href="/delete/admin/organization/{{$admin->id}}" class="btn btn-danger" id="delete"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="/delete/employee/{{$admin->id}}" class="btn btn-danger" id="delete"><i class="fas fa-trash-alt"></i></a>
                                    @endif
                                         </td>
                                     </tr>
