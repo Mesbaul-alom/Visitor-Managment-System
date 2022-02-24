@@ -151,6 +151,7 @@ public function VisitorStore(Request $request){
    
     
     foreach($request->input('name') as $key=>$name){
+        // dd($request->input('employee')[$key]);
         $vuser=Vuser::where('phone',$request->input('phone')[$key])->first();
          if ($vuser == null) {
              
@@ -163,14 +164,15 @@ public function VisitorStore(Request $request){
          }
          $v_id=Vuser::where('phone',$request->input('phone')[$key])->first();
         //  dd($request);
+        foreach($request->input('employee')[$key] as $keyy=>$employee){
         $admin= new Visitor;
         $admin->name=$name;
-        $admin->phone=$request->input('phone')[$key];
+         $admin->phone=$request->input('phone')[$key];
         $admin->email=$request->input('email')[$key];
         $admin->gender=$request->input('gender')[$key];
-        $admin->employee=$request->input('employee')[$key];
+        $admin->employee=$employee;
         $admin->department=$request->input('department')[$key];
-        $admin->branch=$request->input('branch')[$key];
+        $admin->reason=$request->input('reason')[$key];
         $admin->auth=$request->input('auth')[$key];
         $admin->checkin=$request->input('checkin')[$key];
         $admin->checkout=$request->input('checkout')[$key];
@@ -186,7 +188,7 @@ public function VisitorStore(Request $request){
         // $admin->image=$request->input('image')[$key];
          $admin->save();
         
-         
+        }
         
       
     }
@@ -242,15 +244,19 @@ public function RejectedVisiroelist(){
 public function VisitorView($id){
     $vuser=Vuser::with('visitor')->find($id);
    
-    $visitorss=Visitor::with('vuser')->where('vuser_id',$id)->get();
+    $visitorss=Visitor::with('emp')->where('vuser_id',$id)->get();
+   
+    
     return view('employee.visitorView',compact('visitorss','vuser'));
 
 }
 public function detailsView($id){
-    $vuser_id=Visitor::find($id)->pluck('vuser_id')->first();
-    $vuser=Vuser::with('visitor')->find($vuser_id);
-   
-    $visitorss=Visitor::with('vuser')->where('vuser_id',$vuser_id)->get();
+    $idd= auth()->id();
+    $user=User::where('id',$idd)->pluck('employee_id');
+    $vuser_id=Visitor::find($id);
+    $vuser=Vuser::with('visitor')->find($vuser_id->vuser_id);
+  
+    $visitorss=Visitor::with('vuser')->where('vuser_id',$vuser_id->vuser_id)->where('employee',$user)->get();
     return view('employee.visitorView',compact('visitorss','vuser'));
 
 }
@@ -291,6 +297,7 @@ $visitor=Visitor::find($id);
 $visitor->checkout=$current;
 $visitor->checkoutfinal=1;
 $visitor->approve=2;
+$visitor->v_id=NULL;
 $visitor->approve_by	= $name;
 $visitor->save();
 $notification = array(

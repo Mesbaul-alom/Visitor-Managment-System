@@ -89,9 +89,9 @@
 <table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Email</th>
+            <th>Employee Name</th>
+            <th>Reason</th>
+            <th>CheckIn</th>
             {{-- @if ($visitors->checkoutfinal == 0) --}}
             <th>Action</th>
            {{-- @endif
@@ -112,9 +112,9 @@
      
       
         <tr>
-            <td>{{$visitors->name}}</td>
-            <td>{{$visitors->phone}}</td>
-            <td>{{$visitors->email}}</td>
+            <td>{{$visitors->emp->name}}</td>
+            <td>{{$visitors->reason}}</td>
+            <td>{{$visitors->checkin}}</td>
             @if ($visitors->checkoutfinal == 0)
                 
         

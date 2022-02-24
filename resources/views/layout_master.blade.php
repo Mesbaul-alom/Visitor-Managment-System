@@ -125,7 +125,7 @@ integrity="sha256-YcbK69I5IXQftf/mYD8WY0/KmEDCv1asggHpJk1trM8=" crossorigin="ano
     });
   </script>
 
-
+@stack('js')
 {{-- ///////toastar end//////// --}}
 
 

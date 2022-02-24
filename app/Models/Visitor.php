@@ -18,5 +18,8 @@ class Visitor extends Model
     public function vuser(){
     	return $this->belongsTo(Vuser::class,'vuser_id','id');
     }
+    public function emp(){
+    	return $this->belongsTo(Employee::class,'employee','id');
+    }
    
 }
