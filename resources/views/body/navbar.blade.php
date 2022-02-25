@@ -5,15 +5,24 @@
             <li class="d-none d-lg-block">
 
             </li>
+            @php
+            $id= auth()->id();
+            $id=\App\Models\User::find($id);
+            $idd=$id->employee_id;
+              $noti=\App\Models\Visitor::where('employee', $idd)->where('approve',Null)->get()->count();
+               $notilist=\App\Models\Visitor::where('employee', $idd)->where('approve',Null)->take(5)->get();
 
+               $employee=\App\Models\Employee::where('id', $idd)->first();
+             @endphp
             <li class="dropdown d-none d-lg-inline-block">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="fullscreen" href="#">
                     <i class="fe-maximize noti-icon"></i>
                 </a>
             </li>
+            @if ($employee->employee_role == 1)
             <li>
                 <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <i class="fe-bell noti-icon"></i>
+                    <i class="fe-bell noti-icon"><span style="color: red">{{$noti }}</span> </i>
                     <span class="badge bg-danger rounded-circle noti-icon-badge"></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-lg">
@@ -25,15 +34,58 @@
                     <!-- item-->
 
                     <!-- All-->
+                   
                     <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
                       
-                        <i class="far fa-times-circle"></i>
+                        @foreach ($notilist as $list)
+                        <a class="dropdown-item" href="/pending/application/{{$list->id}}" >{{$list->name}}:{{$list->reason}}</a>
+                        @endforeach 
                     </a>
                    
                 </div>
             </li>
+            @else
+           
 
+            @endif
+        
+            @php
+            $id= auth()->id();
+            
+              $noti=\App\Models\Visitor::where('recep_id', $id)->where('approve',1)->orwhere('approve',2)->get()->count();
+               $notilist=\App\Models\Visitor::where('recep_id', $id)->where('approve',1)->orwhere('approve',2)->take(10)->get();
 
+               $employee=\App\Models\Employee::where('id', $idd)->first();
+             @endphp
+                    @if ($employee->employee_role == 2)
+                    <li>
+                        <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            <i class="fe-bell noti-icon"><span style="color: red">{{$noti }}</span> </i>
+                            <span class="badge bg-danger rounded-circle noti-icon-badge"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-lg">
+        
+                          
+        
+        
+        
+                            <!-- item-->
+        
+                            <!-- All-->
+                           
+                            <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                              
+                                @foreach ($notilist as $list)
+                                <a class="dropdown-item" href="/details/visitor/{{$list->id}}" >{{$list->name}}:{{$list->reason}}</a>
+                                @endforeach 
+                            </a>
+                           
+                        </div>
+                    </li>
+                    @else
+                   
+        
+                    @endif
 
             <li>
                

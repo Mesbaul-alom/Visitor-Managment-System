@@ -44,7 +44,7 @@
    <script src="{{ asset('/assets/libs/pdfmake/build/vfs_fonts.js')}}"></script> --}}
    {{-- <script src="{{ asset('/assets/js/chart.js')}}"></script>
    <script type="text/javascript" src="{{asset('assets/js/echarts.min.js')}}"></script> --}}
-
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
    <script src="{{ asset('/assets/js/axios.min.js')}}"></script>
    <!-- third party js ends -->
    <!-- Datatables init -->

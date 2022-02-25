@@ -91,6 +91,7 @@ Route::group(['middleware'=>['is_employee']] , function(){
     Route::get('/approve/visitor/{id}', [EmployeeController::class, 'VisitorApprove'])->name('visitor.approve');
     Route::get('/reject/visitor/{id}', [EmployeeController::class, 'VisitorReject'])->name('visitor.reject');
     Route::get('/visitor/checkout/{id}', [EmployeeController::class, 'VisitorCheckOut'])->name('visitor.checkout');
+    Route::get('/pending/application/{id}', [EmployeeController::class, 'pendingapplication'])->name('pending.application');
     // Route::post('/employee/branch/add', [EmployeeController::class, 'BranchemployeeAdd'])->name('branch.employee.add');
 
 });

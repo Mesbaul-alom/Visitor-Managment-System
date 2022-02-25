@@ -162,6 +162,7 @@ public function VisitorStore(Request $request){
     
     foreach($request->input('name') as $key=>$name){
         // dd($request->input('employee')[$key]);
+        $id= auth()->id();
         $vuser=Vuser::where('phone',$request->input('phone')[$key])->first();
          if ($vuser == null) {
              
@@ -177,6 +178,7 @@ public function VisitorStore(Request $request){
         foreach($request->input('employee')[$key] as $keyy=>$employee){
         $admin= new Visitor;
         $admin->name=$name;
+        $admin->recep_id=$id;
          $admin->phone=$request->input('phone')[$key];
         $admin->email=$request->input('email')[$key];
         $admin->gender=$request->input('gender')[$key];
@@ -187,7 +189,7 @@ public function VisitorStore(Request $request){
         $admin->checkin=$request->input('checkin')[$key];
         $admin->checkout=$request->input('checkout')[$key];
         $admin->v_id=$request->input('id')[$key];
-        $admin->locar=$request->input('locar')[$key];
+        // $admin->locar=$request->input('locar')[$key];
         $admin->vuser_id=$v_id->id;
 
         // $newImageName=time().'-'.$name.'.'.$request->input('image')[$key]->extension();
@@ -337,6 +339,11 @@ public function EmployeeDelete($id){
     return redirect()->back()->with($notification);
     
 
+}
+
+public function pendingapplication($id){
+    $details=Visitor::find($id);
+    return view('employee.pendingapplicatiin',compact('details'));
 }
  
 
