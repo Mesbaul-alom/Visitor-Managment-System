@@ -7,6 +7,7 @@ use App\Models\Branch;
 use App\Models\Visitor;
 use App\Models\User;
 use App\Models\Department;
+use App\Models\Designation;
 use App\Models\Oparetor;
 use App\Models\Admin;
 use App\Models\Vuser;
@@ -17,22 +18,31 @@ use Carbon\Carbon;
 class EmployeeController extends Controller
 {
     public function  EmployeeList(){
-        
-        $employees=Employee::where('employee_role',1)->get();
-        // $branchs=Branch::all();
-        return view('employee.employeelist',compact('employees'));
+        $id= auth()->id();
+    $id=User::find($id);
+    $id=Oparetor::where('id',$id->oparetor_id)->first();
+   
+        $employees=Employee::where('employee_role',1)->where('branch_id',$id->branch)->get();
+         $organization=Designation::all();
+        return view('employee.employeelist',compact('employees','organization'));
     }
     public function  ParmanentEmployeeList(){
         
         $employees=Employee::all();
         // $branchs=Branch::all();
-        return view('employee.employeelist',compact('employees'));
+        $organization=Designation::all();
+        return view('employee.employeelist',compact('employees','organization'));
     }
     public function  Receplist(){
        
-        $employees=Employee::where('employee_role',2)->get();
+        $id= auth()->id();
+        $id=User::find($id);
+        $id=Oparetor::where('id',$id->oparetor_id)->first();
+       
+            $employees=Employee::where('employee_role',2)->where('branch_id',$id->branch)->get();
+        $organization=Designation::all();
         // $branchs=Branch::all();
-        return view('employee.receplist',compact('employees'));
+        return view('employee.receplist',compact('employees','organization'));
     }
 
     public function BranchemployeeAdd(Request $request)
@@ -220,8 +230,7 @@ public function AllVisiroelist(){
 }
 public function HistoryVisiroelist(){
    
-    $visitors=Visitor::all();
-   
+    $visitors=Visitor::with('emp')->get();
     return view('employee.pendingvisitor',compact('visitors'));
 
 }

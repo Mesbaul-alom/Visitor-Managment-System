@@ -12,9 +12,15 @@ use Illuminate\Http\Request;
 class OparetorController extends Controller
 {
     public function  OpaetorList(){
-        $oparetors=Oparetor::all();
+
         $id= auth()->id();
-       $branchs=Branch::where('organization_id',$id)->get();
+        $user_id=User::find($id);
+        $idd=Admin::where('id',$user_id->admin_id)->first();
+        $branchs=Branch::where('organization_id',$idd->organization)->get();
+       
+        $oparetors=Oparetor::where('organization',$idd->organization)->get();
+      
+    //    $branchs=Branch::where('organization_id',$id)->get();
         return view('oparetor.oparetorlist',compact('oparetors','branchs'));
     }
 
@@ -23,12 +29,15 @@ public function BranchOparetorAdd(Request $request)
 {
  
     if ($request->password === $request->re_password) {
-      
+        $id= auth()->id();
+        $id=User::find($id);
+        $id=Admin::where('id',$id->admin_id)->first();
        
         $admin= new Oparetor;
     $admin->name=$request->name;
     $admin->address=$request->address;
     $admin->branch=$request->branch;
+    $admin->organization=$id->organization;
     $admin->phone=$request->phone;
     $admin->comment=$request->comment;
     $admin->email=$request->email;

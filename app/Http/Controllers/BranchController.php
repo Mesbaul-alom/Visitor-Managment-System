@@ -8,6 +8,7 @@ use App\Models\Branch;
 use App\Models\User;
 use App\Models\Department;
 use App\Models\Oparetor;
+use App\Models\Designation;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 
@@ -16,23 +17,30 @@ class BranchController extends Controller
 {
    public function  BranchList(){
     $id= auth()->id();
-       $branchs=Branch::where('organization_id',$id)->get();
+    $id=User::find($id);
+    $id=Admin::where('id',$id->admin_id)->first();
+     $branchs=Branch::where('organization_id',$id->organization)->get();
        return view('admin.branchlist',compact('branchs'));
    }
    public function  DepartmentList(){
-       $departments=Department::all();
-       $id= auth()->id();
-       $branchs=Branch::where('organization_id',$id)->get();
+    $id= auth()->id();
+    $id=User::find($id);
+    $id=Admin::where('id',$id->admin_id)->first();
+       $departments=Department::where('organization_id',$id->organization)->get();
+      
+       $branchs=Branch::where('organization_id',$id->organization)->get();
        return view('admin.departmentslist',compact('departments','branchs'));
    }
  
      public function BranchAdd(Request $request)
    {
       $id= auth()->id();
-      
+      $id=User::find($id);
+      $org_id=Admin::where('id',$id->admin_id)->first();
+     
     $branch= new Branch;
     $branch->name=$request->name;
-    $branch->organization_id=$id;
+    $branch->organization_id=$org_id->organization;
     $branch->address=$request->address;
     $branch->phone=$request->phone;
     $branch->comment=$request->comment;
@@ -47,8 +55,10 @@ class BranchController extends Controller
      public function DepartmentAdd(Request $request)
    {
     $id= auth()->id();
-    $admin=User::where('admin_id',$id)->get();
-    $organization=Admin::Were('id',$admin)->pluck('organization')->get();
+    $admin=User::find($id);
+   
+    $organization=Admin::where('id',$admin->admin_id)->pluck('organization')->first();
+ 
     $branch= new Department();
     $branch->name=$request->name;
     $branch->branch_id=$request->branch;
@@ -61,4 +71,26 @@ class BranchController extends Controller
     );
     return redirect('/department/list')->with($notification);
    }
+
+
+
+
+   public function DesignationList(){
+     $designation=Designation::all();
+     return view('admin.designationlist',compact('designation'));
+   }
+   public function DesignationAdd(Request $request)
+   {
+
+    $designation= new Designation;
+    $designation->name=$request->name;
+    
+    $designation->save();
+    $notification = array(
+        'message' => 'designation Added Sucessyfuly',
+        'alert-type' => 'success',
+    );
+    return redirect('/designation/list')->with($notification);
+   }
+   
 }

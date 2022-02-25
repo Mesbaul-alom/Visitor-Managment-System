@@ -34,6 +34,12 @@ Route::get('employee/home', [HomeController::class, 'EmployeeHome'])->name('empl
 Route::get('/employee/details/{id}', [EmployeeController::class, 'EmployeeDetails'])->name('employee.details');
 Route::get('/delete/employee/{id}', [EmployeeController::class, 'EmployeeDelete'])->name('employee.delete');
 
+Route::get('employee/list', [EmployeeController::class, 'Employeelist'])->name('employee.list');
+Route::post('/employee/branch/add', [EmployeeController::class, 'BranchemployeeAdd'])->name('branch.employee.add');
+
+Route::get('recep/list', [EmployeeController::class, 'Receplist'])->name('recep.list');
+Route::post('/recep/branch/add', [EmployeeController::class, 'BranchRecepAdd'])->name('branch.recep.add');
+
 Route::group(['middleware'=>['is_super']] , function(){
     // add organization view page route
 Route::get('add/organization', [OrganizationController::class, 'AddOrganization'])->name('add.organization');
@@ -65,14 +71,8 @@ Route::group(['middleware'=>['is_admin']] , function(){
     Route::post('/branch/add', [BranchController::class, 'BranchAdd'])->name('branch.add');
     Route::post('/department/add', [BranchController::class, 'DepartmentAdd'])->name('department.add');
     Route::post('/oparetor/branch/add', [OparetorController::class, 'BranchOparetorAdd'])->name('branch.oparetor.add');
-});
-Route::group(['middleware'=>['is_oparetor']] , function(){
-
-    Route::get('employee/list', [EmployeeController::class, 'Employeelist'])->name('employee.list');
-    Route::post('/employee/branch/add', [EmployeeController::class, 'BranchemployeeAdd'])->name('branch.employee.add');
-
-    Route::get('recep/list', [EmployeeController::class, 'Receplist'])->name('recep.list');
-    Route::post('/recep/branch/add', [EmployeeController::class, 'BranchRecepAdd'])->name('branch.recep.add');
+    Route::get('designation/list', [BranchController::class, 'DesignationList'])->name('designation.list');
+    Route::post('/designation/add', [BranchController::class, 'DesignationAdd'])->name('designation.add');
 
 });
 Route::group(['middleware'=>['is_employee']] , function(){

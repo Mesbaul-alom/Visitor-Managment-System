@@ -24,6 +24,9 @@
                                         <th>Name</th>
                                         <th>Phone</th>
                                         <th>Email</th>
+                                        <th>Employee Name</th>
+                                        <th>Check In</th>
+                                        <th>Check Out</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -36,6 +39,14 @@
                                         <td>{{$admin->name}}</td>
                                         <td>{{$admin->phone}}</td>
                                         <td>{{$admin->email}}</td>
+                                        <td>{{$admin->emp->name}}</td>
+                                        <td>{{$admin->checkin}}</td>
+                                        @if ($admin->checkoutfinal == 1)
+                                        <td>{{$admin->checkout}}</td>
+                                            @else
+                                            <td>Not Checkout</td>
+                                        @endif
+                                        
                                         <td>
                                      <a href="/details/visitor/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                     

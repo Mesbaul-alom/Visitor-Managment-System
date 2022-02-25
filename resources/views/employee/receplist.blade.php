@@ -97,9 +97,9 @@
                 <label for="designation" class="form-label">Designation<span class="text-danger">*</span></label>
                 <select name="designation" id="designation" class="form-control" >
                     <option selected disabled>Select designation</option>
-                  
-                    <option value="1">Employee</option>
-                    <option value="2">Reship</option>
+                    @foreach ($organization as $org)
+                    <option value="{{$org->id}}">{{$org->name}}</option>
+                    @endforeach
                   
                 </select>
                 {{-- <input type="phone" name="phone" parsley-trigger="change" value="{{old('phone')}}" class="form-control" id="phone" /> --}}
@@ -115,15 +115,16 @@
                 @endif
                </div>
            
-         
-         
-            <div class="mb-3">
+               <div class="mb-3">
                 <label for="comment" class="form-label">Comment<span class="text-danger">*</span></label>
-                <input type="comment" name="comment" parsley-trigger="change" value="{{old('comment')}}" class="form-control" id="comment" />
+                <textarea name="comment" parsley-trigger="change" value="{{old('comment')}}" class="form-control" id="comment" cols="30" rows="5"></textarea>
+  
                 @if($errors->has('address'))
                 <div style="color:red"> {{$errors->first('address')}}</div>
                 @endif
             </div>
+         
+           
             <hr>
 
             <div class="mb-3">

@@ -32,10 +32,12 @@ class OrganizationController extends Controller
                     $organization->phone=$request->phone;
                     $organization->email=$request->email;
                     $organization->is_active=1;
-                  
+                  if ($request->username) {
                     $newImageName=time().'-'.$request->username.'.'.$request->image->extension();
                     $image=$request->image->move(public_path('org_img'),$newImageName);
                     $organization->image=$newImageName;
+                  }
+                   
                     $organization->save();
 
                   

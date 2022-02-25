@@ -119,6 +119,53 @@
                         </ul>
                     </div>
                 </li>
+
+                
+                {{-- <li>
+                    <a href="#sidebar4" data-bs-toggle="collapse">
+                        <i class="fas fa-user"></i>
+                        <span> Employee </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebar4">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('employee.list')}}">
+                                   Employee List</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('recep.list') }}">
+                                    Receptionist List</a>
+                            </li>
+
+                           
+                           
+                        </ul>
+                    </div>
+                </li>
+                 --}}
+                <li>
+                    <a href="#sidebar5" data-bs-toggle="collapse">
+                        <i class="fas fa-user"></i>
+                        <span> Designation </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebar5">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('designation.list')}}">
+                                    Designation List</a>
+                            </li>
+                            
+
+                           
+                           
+                        </ul>
+                    </div>
+                </li>
+
+              
+            </li>
                    
                
               
@@ -137,6 +184,7 @@
                         <span> Dashboard </span>
                     </a>
                 </li>
+                
                 @php
                     $user = Auth::user();
                 @endphp
@@ -201,10 +249,10 @@
                                    Visitor List</a>
                             </li>
 
-                            <li>
+                            {{-- <li>
                                 <a href="{{ route('pending.visitor.list') }}">
                                  pre  Visitor List</a>
-                            </li>
+                            </li> --}}
                             <li>
                                 <a href="{{ route('history.visitor.list') }}">
                                    Visiting History</a>
@@ -214,7 +262,7 @@
                         </ul>
                     </div>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="#sidebar3" data-bs-toggle="collapse">
                         <i class="fas fa-user"></i>
                         <span> Locar </span>
@@ -235,7 +283,7 @@
                            
                         </ul>
                     </div>
-                </li>
+                </li> --}}
                 <li>
                     <a href="#sidebar4" data-bs-toggle="collapse">
                         <i class="fas fa-user"></i>
@@ -250,10 +298,10 @@
                                 <a href="{{ route('parmanent.employee.list') }}">
                                  Parmanent Employee</a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="{{ route('pending.visitor.list') }}">
                                  Temp Employee</a>
-                            </li>
+                            </li> --}}
                            
                         </ul>
                     </div>
