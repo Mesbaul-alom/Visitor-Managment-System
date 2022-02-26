@@ -63,7 +63,7 @@
                                               
                                                 <div class="col-md-4">
                                                     <label for="">department</label>
-                                                    <select name="department" class="form-control" id="">
+                                                    <select name="department" class="form-control" id="department">
                                                         <option selected disabled>Select Department</option>
                                                         @foreach ($deparments as $deparment)
                                                             <option value="{{ $deparment->id }}">{{ $deparment->name }}
@@ -170,8 +170,7 @@
             </div>
         </div>
     </div>
-
-
+    
     <script>
         window.addEventListener('DOMContentLoaded', function() {
             const task_container = document.getElementById('task_container');
@@ -405,6 +404,25 @@
 @push('js')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+     $("#department").on('change',function(e){
+           let driver_id = this.value;
+           console.log("mesba");
+           const department   = document.getElementById('employee_0');
+        //    const v_no   = document.getElementById('v_no');
+        //    console.log(driver_id);
+           axios.get(`/employee-list/${driver_id}`)
+                .then(response=>{
+                    console.log(response);
+                    department.value = response.data.department.name;
+                   
+                })
+                .catch(error=>{
+
+                })
+       });
+</script>
 
     <script>
         $(document).ready(function() {

@@ -26,6 +26,11 @@ class EmployeeController extends Controller
          $organization=Designation::all();
         return view('employee.employeelist',compact('employees','organization'));
     }
+    public function  Employeelistget($id){
+       
+    $department=Employee::where('department_id',$id)->where('employee_role',1)->get();
+    return response()->json(compact('department'));
+    }
     public function  ParmanentEmployeeList(){
         
         $employees=Employee::all();
