@@ -90,6 +90,7 @@ Route::group(['middleware'=>['is_employee']] , function(){
     Route::post('/visitor/store', [EmployeeController::class, 'VisitorStore'])->name('visitor.store');
     Route::get('/view/visitor/{id}', [EmployeeController::class, 'VisitorView'])->name('visitor.view');
     Route::get('/details/visitor/{id}', [EmployeeController::class, 'detailsView'])->name('visitor.details');
+    Route::get('/details/recep/visitor/{id}', [EmployeeController::class, 'detailsrecepView'])->name('visitor.details');
     Route::get('/approve/visitor/{id}', [EmployeeController::class, 'VisitorApprove'])->name('visitor.approve');
     Route::get('/reject/visitor/{id}', [EmployeeController::class, 'VisitorReject'])->name('visitor.reject');
     Route::get('/visitor/checkout/{id}', [EmployeeController::class, 'VisitorCheckOut'])->name('visitor.checkout');

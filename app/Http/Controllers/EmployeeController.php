@@ -156,46 +156,122 @@ public function VisitorAdd(){
 
     return view('employee.visitoradd',compact('employees','deparments'));
 }
+
+
+// visitor sore funtion start----------------------------------------------------------
+// public function VisitorStore(Request $request){
+   
+//     foreach($request->input('name') as $key=>$name){
+//         // dd($request->input('employee')[$key]);
+//         $id= auth()->id();
+//         $vuser=Vuser::where('phone',$request->input('phone')[$key])->first();
+//          if ($vuser == null) {
+             
+//             $admin= new Vuser;
+//             $admin->name=$name;
+//             // $admin->recep_id=$id;
+//             $admin->phone=$request->input('phone')[$key];
+//             $admin->email=$request->input('email')[$key];
+//             $admin->gender=$request->input('gender')[$key];
+//             $admin->save();
+//          }
+//          $v_id=Vuser::where('phone',$request->input('phone')[$key])->first();
+//         //  dd($request);
+//         foreach($request->input('employee')[$key] as $keyy=>$employee){
+//         $admin= new Visitor;
+//         $admin->name=$name;
+//         $admin->recep_id=$id;
+//          $admin->phone=$request->input('phone')[$key];
+//         $admin->email=$request->input('email')[$key];
+//         $admin->gender=$request->input('gender')[$key];
+//         $admin->employee=$employee;
+//         $admin->department=$request->input('department')[$key];
+//         $admin->reason=$request->input('reason')[$key];
+//         $admin->auth=$request->input('auth')[$key];
+//         $admin->checkin=$request->input('checkin')[$key];
+//         $admin->checkout=$request->input('checkout')[$key];
+//         $admin->v_id=$request->input('id')[$key];
+//         // $admin->locar=$request->input('locar')[$key];
+//         $admin->vuser_id=$v_id->id;
+
+//         // $newImageName=time().'-'.$name.'.'.$request->input('image')[$key]->extension();
+//         // $image=$request->input('image')[$key]->move(public_path('org_img'),$newImageName);
+//         // $admin->image=$newImageName;
+   
+
+//         // $admin->image=$request->input('image')[$key];
+//          $admin->save();
+        
+//         }
+        
+      
+//     }
+//     $notification = array(
+//         'message' => 'Visitor Add Done',
+//         'alert-type' => 'success',
+//     );
+//     return redirect('visitor/list')->with($notification);
+   
+  
+// }
 public function VisitorStore(Request $request){
    
-   
-    
-    foreach($request->input('name') as $key=>$name){
+    // foreach($request->input('name') as $key=>$name){
         // dd($request->input('employee')[$key]);
+
+        $folderPath = public_path('\org_img');
+       
+        $img=$request->input('image');
+        $image_parts = explode(";base64,", $img);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+      
+        $image_base64 = base64_decode($image_parts[1]);
+        $fileName = uniqid() . '.png';
+        $image=$request->image->move(public_path('org_img'),$fileName);
+        // dd( $fileName);
+        $file = $folderPath . $fileName;
+        file_put_contents($file, $image_base64);
+
         $id= auth()->id();
-        $vuser=Vuser::where('phone',$request->input('phone')[$key])->first();
+        $vuser=Vuser::where('phone',$request->input('phone'))->first();
          if ($vuser == null) {
              
             $admin= new Vuser;
-            $admin->name=$name;
-            $admin->phone=$request->input('phone')[$key];
-            $admin->email=$request->input('email')[$key];
-            $admin->gender=$request->input('gender')[$key];
+            $admin->name=$request->input('name');
+            // $admin->recep_id=$id;
+            $admin->phone=$request->input('phone');
+            $admin->email=$request->input('email');
+            $admin->gender=$request->input('gender');
+            $admin->image=$fileName;
             $admin->save();
          }
-         $v_id=Vuser::where('phone',$request->input('phone')[$key])->first();
-        //  dd($request);
-        foreach($request->input('employee')[$key] as $keyy=>$employee){
+         $v_id=Vuser::where('phone',$request->input('phone'))->first();
+        //   dd($request->all());
+        foreach($request->input('employee') as  $key=>$employee){
         $admin= new Visitor;
-        $admin->name=$name;
+        $admin->name=$request->input('name');;
         $admin->recep_id=$id;
-         $admin->phone=$request->input('phone')[$key];
-        $admin->email=$request->input('email')[$key];
-        $admin->gender=$request->input('gender')[$key];
+         $admin->phone=$request->input('phone');
+        $admin->email=$request->input('email');
+        $admin->gender=$request->input('gender');
         $admin->employee=$employee;
-        $admin->department=$request->input('department')[$key];
-        $admin->reason=$request->input('reason')[$key];
-        $admin->auth=$request->input('auth')[$key];
-        $admin->checkin=$request->input('checkin')[$key];
-        $admin->checkout=$request->input('checkout')[$key];
-        $admin->v_id=$request->input('id')[$key];
+        $admin->department=$request->input('department');
+        $admin->reason=$request->input('reason');
+        $admin->auth=$request->input('auth');
+        $admin->checkin=$request->input('checkin');
+        $admin->checkout=$request->input('checkout');
+        $admin->v_id=$request->input('id');
         // $admin->locar=$request->input('locar')[$key];
         $admin->vuser_id=$v_id->id;
 
         // $newImageName=time().'-'.$name.'.'.$request->input('image')[$key]->extension();
         // $image=$request->input('image')[$key]->move(public_path('org_img'),$newImageName);
         // $admin->image=$newImageName;
-   
+        
+        $admin->image=$fileName;
+    //   dd($fileName);
+        // print_r($);
 
         // $admin->image=$request->input('image')[$key];
          $admin->save();
@@ -203,7 +279,7 @@ public function VisitorStore(Request $request){
         }
         
       
-    }
+    // }
     $notification = array(
         'message' => 'Visitor Add Done',
         'alert-type' => 'success',
@@ -233,7 +309,7 @@ public function AllVisiroelist(){
 public function HistoryVisiroelist(){
    
     $visitors=Visitor::with('emp')->get();
-    return view('employee.pendingvisitor',compact('visitors'));
+    return view('employee.historyvisitor',compact('visitors'));
 
 }
 public function ApproveVisiroelist(){
@@ -268,6 +344,18 @@ public function detailsView($id){
     $vuser=Vuser::with('visitor')->find($vuser_id->vuser_id);
   
     $visitorss=Visitor::with('vuser')->where('vuser_id',$vuser_id->vuser_id)->where('employee',$user)->get();
+   
+    return view('employee.visitorView',compact('visitorss','vuser'));
+
+}
+public function detailsrecepView($id){
+    $idd= auth()->id();
+    $user=User::where('id',$idd)->pluck('employee_id');
+    // dd( $user);
+    $vuser_id=Visitor::find($id);
+    $vuser=Vuser::with('visitor')->find($vuser_id->vuser_id);
+    $visitorss=Visitor::with('vuser')->where('recep_id',$idd)->get();
+   
     return view('employee.visitorView',compact('visitorss','vuser'));
 
 }
@@ -304,13 +392,18 @@ public function VisitorReject($id){
 public function VisitorCheckOut($id){
     $current = Carbon::now();
     $name= auth()->user()->name;
-$visitor=Visitor::find($id);
-$visitor->checkout=$current;
-$visitor->checkoutfinal=1;
-$visitor->approve=2;
-$visitor->v_id=NULL;
-$visitor->approve_by	= $name;
-$visitor->save();
+
+$visitors=Visitor::where('vuser_id',$id)->get();
+foreach ($visitors as  $visitor) {
+    $visitor=Visitor::find($visitor->id);
+    $visitor->checkout=$current;
+    $visitor->checkoutfinal=1;
+    $visitor->approve=2;
+    $visitor->v_id=NULL;
+    $visitor->approve_by	= $name;
+    $visitor->save();
+}
+
 $notification = array(
     'message' => 'Visitor CheckOut Done',
     'alert-type' => 'success',

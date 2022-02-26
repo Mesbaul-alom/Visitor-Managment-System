@@ -23,21 +23,21 @@
                                             <div class="row ">
                                                 <div class="col-md-4">
                                                     <label for="">Name</label>
-                                                    <input type="text" name="name" class="form-control">
+                                                    <input type="text" name="name[]" class="form-control">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="">Email</label>
-                                                    <input type="text" name="email" class="form-control">
+                                                    <input type="text" name="email[]" class="form-control">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="">Phone</label>
-                                                    <input type="text" name="phone" class="form-control">
+                                                    <input type="text" name="phone[]" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label for="">Gender</label>
-                                                    <select name="gender" id="" class="form-control">
+                                                    <select name="gender[]" id="" class="form-control">
                                                         <option>Male</option>
                                                         <option>Female</option>
                                                     </select>
@@ -49,7 +49,7 @@
                                                 <div class="col-md-4">
                                                     <label for="">Employee</label>
 
-                                                    <select name="employee[]" id="employee_0" class="form-control"
+                                                    <select name="employee[0][]" id="employee_0" class="form-control"
                                                         multiple>
                                                         <option value="">Select Employee</option>
                                                         
@@ -63,7 +63,7 @@
                                               
                                                 <div class="col-md-4">
                                                     <label for="">department</label>
-                                                    <select name="department" class="form-control" id="">
+                                                    <select name="department[]" class="form-control" id="">
                                                         <option selected disabled>Select Department</option>
                                                         @foreach ($deparments as $deparment)
                                                             <option value="{{ $deparment->id }}">{{ $deparment->name }}
@@ -83,17 +83,12 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label for="">Reason</label>
-                                                    <input type="text" name="reason" class="form-control">
+                                                    <input type="text" name="reason[]" class="form-control">
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <label for="">Id</label>
-                                                    <input type="text" name="id" class="form-control">
-
-                                                </div>
-                                                {{-- <div class="col-md-4">
                                                     <label for="">Authenticate*(if any)</label>
                                                     <input type="text" name="auth[]" class="form-control">
-                                                </div> --}}
+                                                </div>
                                                 {{-- <div class="col-md-4">
                                                     <label for="">Image</label>
                                                     <input type="file" name="image[]" class="form-control">
@@ -104,15 +99,19 @@
                                             <div class="row">
 
 
-                                               
+                                                <div class="col-md-4">
+                                                    <label for="">Id</label>
+                                                    <input type="text" name="id[]" class="form-control">
+
+                                                </div>
                                                 <div class="col-md-4">
                                                     <label for="">Check IN</label>
-                                                    <input type="datetime-local" name="checkin" class="form-control">
+                                                    <input type="datetime-local" name="checkin[]" class="form-control">
 
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="">Validation Time(default checkout time)</label>
-                                                    <input type="datetime-local" name="checkout" class="form-control">
+                                                    <input type="datetime-local" name="checkout[]" class="form-control">
                                                 </div>
 
 
@@ -133,7 +132,7 @@
                                                     <div id="live_camera"></div>
                                                     <hr/>
                                                     <input type=button value="Take Snapshot" onClick="capture_web_snapshot()">
-                                                    <input type="hidden" name="image" class="image-tag">
+                                                    <input type="hidden" name="image[]" class="image-tag">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div id="preview"></div>
@@ -156,7 +155,7 @@
                                     </div>
                                     <hr>
                                     <center style="padding-top:50px">
-                                        {{-- <button type="button" class="btn btn-success" id="add_task">+</button> --}}
+                                        <button type="button" class="btn btn-success" id="add_task">+</button>
                                         <button class="btn btn-primary">Save</button>
                                     </center>
 

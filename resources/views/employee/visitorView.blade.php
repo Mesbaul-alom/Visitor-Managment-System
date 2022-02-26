@@ -19,7 +19,7 @@
                                 <div class="col-7">
                                     <div class="text-primary p-3">
                                         <h5 class="text-primary">Welcome</h5>
-                                        <p>{{ Auth::user()->name }}</p>
+                                        <img src="{{('/org_img/'.$vuser->image)}}" alt="" class="img-thumbnail rounded-circle">
                                     </div>
                                 </div>
                                 <div class="col-5 align-self-end">
@@ -85,6 +85,14 @@
        
 
 </div>
+
+<center>
+    @if ($vuser->checkout == null)
+        <a href="/visitor/checkout/{{$vuser->id}}" class="btn btn-primary" >check Out</a>
+    @endif
+    
+    
+</center>
 <hr>
 <table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
     <thead>
@@ -93,6 +101,7 @@
             <th>Reason</th>
             <th>CheckIn</th>
             {{-- @if ($visitors->checkoutfinal == 0) --}}
+            <th>Check Out</th>
             <th>Action</th>
            {{-- @endif
             @if ($visitors->approve == 1 || $visitors->approve == null) --}}
@@ -101,7 +110,8 @@
             @if ($visitors->approve == 2)
             <th>Rejected By</th>
             @endif --}}
-            <th>Check Out</th>
+            
+            <th>Status</th>
         </tr>
     </thead>
 
@@ -115,6 +125,7 @@
             <td>{{$visitors->emp->name}}</td>
             <td>{{$visitors->reason}}</td>
             <td>{{$visitors->checkin}}</td>
+            <td>{{$visitors->checkout}}</td>
             @if ($visitors->checkoutfinal == 0)
                 
         
@@ -144,7 +155,7 @@
             <td>{{$visitors->approve_by	}}</td>
             <td>
                 @if ($visitors->checkoutfinal == 0)
-            <a href="/visitor/checkout/{{$visitors->id}}" class="btn btn-danger" id="checkout">Check Out</a>
+                <a class="btn btn-success" >Already Check In Now</a>
             @else
             <a class="btn btn-danger" >Already Check Out</a>
             @endif

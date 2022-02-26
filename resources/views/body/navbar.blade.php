@@ -54,8 +54,8 @@
             @php
             $id= auth()->id();
             
-              $noti=\App\Models\Visitor::where('recep_id', $id)->where('approve',1)->orwhere('approve',2)->get()->count();
-               $notilist=\App\Models\Visitor::where('recep_id', $id)->where('approve',1)->orwhere('approve',2)->take(10)->get();
+              $noti=\App\Models\Visitor::where('recep_id', $id)->whereNotNull('approve')->where('checkoutfinal',null)->get()->count();
+               $notilist=\App\Models\Visitor::where('recep_id', $id)->whereNotNull('approve')->where('checkoutfinal',Null)->take(10)->get();
 
                $employee=\App\Models\Employee::where('id', $idd)->first();
              @endphp
@@ -81,7 +81,7 @@
                             <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
                               
                                 @foreach ($notilist as $list)
-                                <a class="dropdown-item" href="/details/visitor/{{$list->id}}" >{{$list->name}}:{{$list->reason}}</a>
+                                <a class="dropdown-item" href="/details/recep/visitor/{{$list->id}}" >{{$list->name}}:{{$list->reason}}</a>
                                 @endforeach 
                             </a>
                            

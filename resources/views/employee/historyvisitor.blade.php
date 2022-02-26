@@ -15,16 +15,8 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="text-end">
-                            
-                               <a href="/visitor/add" class="btn btn-success">Insert</a>
-                      
-                            </div>
                             <h4 class="header-title">Visitors List</h4>
-                           {{-- <center>
-                               <h3>Id Card:</h3>
-                               <input type="search">
-                           </center> --}}
+                           
 
                             <table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
@@ -32,8 +24,10 @@
                                         <th>Name</th>
                                         <th>Phone</th>
                                         <th>Email</th>
-                                        <th>V_id</th>
-                                        <th>Action</th>
+                                        <th>Employee Name</th>
+                                        <th>Check In</th>
+                                        <th>Check Out</th>
+                                        {{-- <th>Action</th> --}}
                                     </tr>
                                 </thead>
 
@@ -45,20 +39,19 @@
                                         <td>{{$admin->name}}</td>
                                         <td>{{$admin->phone}}</td>
                                         <td>{{$admin->email}}</td>
-                                        <td>{{$admin->v_id}}</td>
-                                        {{-- @if ($admin->is_active == 1)
-                                        <td > <span class="btn btn-primary">Active</span> </td>
-                                        @else
-                                           <td>Diactive</td>
-                                        @endif --}}
-
-                                        <td>
+                                        <td>{{$admin->emp->name}}</td>
+                                        <td>{{$admin->checkin}}</td>
+                                        @if ($admin->checkoutfinal == 1)
+                                        <td>{{$admin->checkout}}</td>
+                                            @else
+                                            <td>Not Checkout</td>
+                                        @endif
+                                        
+                                        {{-- <td>
                                             
-                                     <a href="/view/visitor/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
-                                     <a href="/edit/organization/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                    {{-- <a href="/delete/admin/organization/{{$admin->id}}" class="btn btn-danger" id="delete"><i class="fas fa-trash-alt"></i></a> --}}
-                                   
-                                        </td>
+                                     <a href="/details/visitor/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                    
+                                        </td> --}}
                                     </tr>
                                     @endforeach
                                 </tbody>

@@ -48,6 +48,7 @@
                                         @endif
                                         
                                         <td>
+                                            
                                      <a href="/details/visitor/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                     
                                         </td>
