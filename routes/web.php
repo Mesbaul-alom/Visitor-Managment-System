@@ -59,7 +59,9 @@ Route::post('/organization/update/{id}', [OrganizationController::class, 'Organi
 // organization delete
 Route::delete('/organization/delete/{id}', [OrganizationController::class, 'OrganizationDelete'])->name('organization.delete');
 // admnorganization delete
-Route::delete('/delete/admin/organization/{id}', [OrganizationController::class, 'OrganizationAdminDelete'])->name('organization.admin.delete');
+Route::get('/delete/admin/organization/{id}', [OrganizationController::class, 'OrganizationAdminDelete'])->name('organization.admin.delete');
+Route::get('/edit/organization/{id}', [OrganizationController::class, 'Organizationadminedit'])->name('organization.admin.edit');
+Route::post('/update/organization/admin/{id}', [OrganizationController::class, 'Organizationadminedupdate'])->name('organization.admin.update');
 
 });
 

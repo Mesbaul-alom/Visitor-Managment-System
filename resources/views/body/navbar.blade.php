@@ -19,6 +19,9 @@
                     <i class="fe-maximize noti-icon"></i>
                 </a>
             </li>
+            @if ( $idd == null)
+                
+            @else
             @if ($employee->employee_role == 1)
             <li>
                 <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -44,10 +47,9 @@
                    
                 </div>
             </li>
-            @else
-           
-
             @endif
+            @endif
+          
         
             @php
             $id= auth()->id();
@@ -57,7 +59,10 @@
 
                $employee=\App\Models\Employee::where('id', $idd)->first();
              @endphp
-                    @if ($employee->employee_role == 2)
+             @if ( $idd == null)
+                 
+             @else
+               @if ($employee->employee_role == 2)
                     <li>
                         <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <i class="fe-bell noti-icon"><span style="color: red">{{$noti }}</span> </i>
@@ -85,7 +90,9 @@
                     @else
                    
         
-                    @endif
+                    @endif 
+             @endif
+                    
 
             <li>
                

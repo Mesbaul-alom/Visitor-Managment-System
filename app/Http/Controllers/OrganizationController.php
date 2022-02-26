@@ -8,6 +8,7 @@ use App\Models\Admin;
 use App\Models\Branch;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Exception;
 
 class OrganizationController extends Controller
@@ -88,6 +89,20 @@ public function OrganizationDelete( $id)
     }
     return response()->json(['error'=>'Some Error Occured Please Try Again!'],500);
 }
+public function OrganizationAdminDelete( $id)
+{    
+    $id=$id;
+    $user=User::where('admin_id',$id)->pluck('id')->first();
+    // dd($user);
+    User::destroy($user);
+    Admin::destroy($id);
+    $notification = array(
+        'message' => 'Admin Delete Done',
+        'alert-type' => 'success',
+    );
+    
+    return redirect()->back()->with($notification);
+}
 
 // organization edit funtiom
 public function OrganizationEdit( $id)
@@ -130,6 +145,43 @@ public function OrganizationUpdate(Request $request,$id)
     }
 }
 
+
+
+
+
+
+// org admim edit
+public function Organizationadminedit($id){
+    $admin=Admin::find($id);
+    return view('admin.adminedit',compact('admin'));
+}
+public function Organizationadminedupdate(Request $request,$id){
+    // dd($request);
+    $admin=Admin::find($id);
+    $admin->name=$request->name;
+    $admin->adress=$request->address;
+    $admin->phone=$request->phone;
+    $admin->email=$request->email;
+    $admin->password=$request->password;
+    $admin->save();
+    $notification = array(
+        'message' => 'Admin Updated Sucessyfuly',
+        'alert-type' => 'success',
+    );
+
+    $org_id=User::where('admin_id', $id)->pluck('id')->first();
+
+    $admin=User::find($org_id);
+    $admin->name=$request->name;
+    $admin->email=$request->email;
+    $admin->password=Hash::make($request->password);
+    $admin->save();
+    $notification = array(
+        'message' => 'Admin Added Sucessyfuly',
+        'alert-type' => 'success',
+    );
+    return redirect('organization/admin/list')->with($notification);
+}
 
 }
 
