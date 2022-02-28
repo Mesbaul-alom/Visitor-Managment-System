@@ -3,8 +3,12 @@
         <!-- User box -->
         <!--- Sidemenu -->
         <div id="sidebar-menu">
+           
             @if (auth()->user()->is_admin == 1)
             <ul id="side-menu">
+                <li>
+                  <img src="" alt="">
+                </li>
                 <li>
                     <a href="/home">
                         <i class="fas fa-home"></i>

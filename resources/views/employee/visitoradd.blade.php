@@ -17,7 +17,9 @@
                             <form action="{{ route('visitor.store') }}" method="POST" enctype="multipart/form-data">
                                 <div class="card-body">
                                     @csrf
-
+                                               
+                                                <input type="text">
+                                                <button>Set</button>
                                     <div id="task_container">
                                         <div class="single_task">
                                             <div class="row ">
@@ -42,45 +44,6 @@
                                                         <option>Female</option>
                                                     </select>
                                                 </div>
-
-
-                                                {{-- <div id="task">
-                                                    <div class="single"> --}}
-                                                <div class="col-md-4">
-                                                    <label for="">Employee</label>
-
-                                                    <select name="employee[]" id="employee_0" class="form-control"
-                                                        multiple>
-                                                        <option value="">Select Employee</option>
-                                                        
-                                                        @foreach ($employees as $employee)
-                                                            <option value="{{ $employee->id }}">{{ $employee->name }}
-                                                            </option>
-                                                        @endforeach
-
-                                                    </select>
-                                                </div>
-                                              
-                                                <div class="col-md-4">
-                                                    <label for="">department</label>
-                                                    <select name="department" class="form-control" id="department">
-                                                        <option selected disabled>Select Department</option>
-                                                        @foreach ($deparments as $deparment)
-                                                            <option value="{{ $deparment->id }}">{{ $deparment->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-
-                                                </div>
-                                                <div class="col-md-1">
-                                                    {{-- <button type="button" class="btn btn-success" id="addd">+</button> --}}
-
-                                                </div>
-                                                    {{-- </div>
-                                            </div> --}}
-
-
-                                            <div class="row">
                                                 <div class="col-md-4">
                                                     <label for="">Reason</label>
                                                     <input type="text" name="reason" class="form-control">
@@ -90,6 +53,65 @@
                                                     <input type="text" name="id" class="form-control">
 
                                                 </div>
+
+                                            </div>
+                                                {{-- <div id="task">
+                                                    <div class="single"> --}}
+                                                <div class="employeeAddrow row" id="employeeAddrow">
+
+                                                    <div class="row">
+
+                                                    
+                                                        
+                                                
+                                                        <div class="col-md-4 testde" id="department_container">
+                                                            <label for="">department</label>
+                                                            <select name="department" class="form-control" id="department">
+                                                                <option selected disabled>Select Department</option>
+                                                                @foreach ($deparments as $deparment)
+                                                                    <option value="{{ $deparment->id }}">{{ $deparment->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+
+                                                        </div>
+
+                                                        <div class="col-md-4 testem" id="employee_container">
+                                                            <label for="">Employee</label>
+
+                                                            <select name="employee[]" required id="employee_0" class="js-example-placeholder-multiple js-states form-control " data-id="0">
+                                                                <option selected disabled>select a employee</option>
+                                                                {{-- <option value="" disabled>Select Employee</option>
+                                                                <option value="" disabled>Select Employee</option> --}}
+                                                                
+                                                                {{-- @foreach ($employees as $employee)
+                                                                    <option value="{{ $employee->id }}">{{ $employee->name }}
+                                                                    </option>
+                                                                @endforeach --}}
+
+                                                            </select>
+                                                        </div>
+
+                                                        
+                                                    </div>
+
+                                                    
+                                                </div>
+
+                                                <div class="row col-1 mt-2">
+                                                    <button id="add_more" class="btn btn-success">Add More</button>
+                                                </div>
+                                                
+                                                <div class="col-md-1">
+                                                    {{-- <button type="button" class="btn btn-success" id="addd">+</button> --}}
+
+                                                </div>
+                                                    {{-- </div>
+                                            </div> --}}
+
+
+                                            <div class="row">
+                                               
                                                 {{-- <div class="col-md-4">
                                                     <label for="">Authenticate*(if any)</label>
                                                     <input type="text" name="auth[]" class="form-control">
@@ -406,44 +428,134 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-     $("#department").on('change',function(e){
-           let driver_id = this.value;
-           console.log("mesba");
-           const department   = document.getElementById('employee_0');
-        //    const v_no   = document.getElementById('v_no');
-        //    console.log(driver_id);
-           axios.get(`/employee-list/${driver_id}`)
-                .then(response=>{
-                    console.log(response);
-                    department.value = response.data.department.name;
-                   
-                })
-                .catch(error=>{
+    var selectCounter = 0;
+    $(document).on('change','#department',(e)=>
+    {
+        let driver_id = e.target.value;
+        console.log("mesba");
+        // const department   = document.getElementById('employee_0');
+        const department=$(e.target).parent().siblings().children('select');
+        // .children('#employee_0');
+        console.log(department);
+    //    const v_no   = document.getElementById('v_no');
+    //    console.log(driver_id);
+        axios.get(`/employee-list/${driver_id}`)
+        .then(response=>{
 
-                })
-       });
+            // console.log(response);
+            var data = response.data.department;
+            console.log(data);
+
+            data.forEach(employee => {
+                console.log('here',employee.id);
+                var s = `<option value="${employee.id }">${employee.name }</option>`;
+
+                $(department).append(s);
+            });
+            $(department).attr('multiple','multiple');
+            intDropDown(department);
+            
+        })
+        .catch(error=>{
+
+        })
+    });
 </script>
 
-    <script>
+
+
+<script>
+    function intDropDown(department)
+    {
+
         $(document).ready(function() {
-            $('#employee_0').select2();
+            // $('#employee_0').select2();
+
+            var id = $(department).data(id);
+            console.log(id.id);
+
+
+            $(`#employee_${id.id}`).select2({
+                placeholder: {
+                    id: '', // the value of the option
+                    text: 'Selected Employee'
+                },
+                allowClear: true
+            });
+            $(`#employee_${id.id}`).val("");
+            $(`#employee_${id.id}`).trigger("change");
         });
-    </script>
-    <script language="JavaScript">
-        Webcam.set({
-            width: 490,
-            height: 150,
-            image_format: 'jpeg',
-            jpeg_quality: 90
-        });
-      
-        Webcam.attach( '#live_camera' );
-      
-        function capture_web_snapshot() {
-            Webcam.snap( function(site_url) {
-                $(".image-tag").val(site_url);
-                document.getElementById('preview').innerHTML = '<img src="'+site_url+'"/>';
-            } );
-        }
-    </script>
+
+    }
+</script>
+
+
+
+<script>
+
+    $('#add_more').on('click',function(e)
+    {
+        e.preventDefault();
+        selectCounter++;
+        // console.log('hrere');
+        var departmentClone = $('#department_container').clone();
+        // console.log(departmentClone.html());
+        var s =  `<div class="row">
+                                 
+            <div class="col-md-4">
+                        ${departmentClone.html()}
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="">Employee</label>
+
+                        <select name="employee[]" required id="employee_${selectCounter}" class="js-example-placeholder-multiple js-states form-control " data-id="${selectCounter}">
+                            <option selected disabled>select a employee</option>
+                        </select>
+                    </div>
+
+                   
+
+                    <div class="col-md-1">
+                        <button id="delete_employee_contant" class="btn btn-danger">DELETE</button>
+                    </div>
+
+                </div>`;
+        
+        $('#employeeAddrow').append(s);
+        
+
+        
+    });
+</script>
+
+<script>
+    $(document).on('click','#delete_employee_contant',function(e)
+    {
+        e.preventDefault();
+        $(this).parent('div').parent('div').remove();
+    })
+</script>
+
+
+
+<script language="JavaScript">
+    Webcam.set({
+        width: 490,
+        height: 150,
+        image_format: 'jpeg',
+        jpeg_quality: 90
+    });
+    
+    Webcam.attach( '#live_camera' );
+    
+    function capture_web_snapshot() {
+        Webcam.snap( function(site_url) {
+            $(".image-tag").val(site_url);
+            document.getElementById('preview').innerHTML = '<img src="'+site_url+'"/>';
+        } );
+    }
+</script>
+
 @endpush

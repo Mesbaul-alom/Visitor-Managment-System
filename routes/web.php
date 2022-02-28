@@ -68,8 +68,11 @@ Route::post('/update/organization/admin/{id}', [OrganizationController::class, '
 Route::group(['middleware'=>['is_admin']] , function(){
 
     Route::get('branch/list', [BranchController::class, 'BranchList'])->name('branch.list');
+    Route::get('/edit/branch/{id}', [BranchController::class, 'BranchEdit'])->name('branch.edit');
+    Route::post('/update/branch/admin/{id}', [BranchController::class, 'Branchdupdate'])->name('branch.admin.update');
     Route::get('department/list', [BranchController::class, 'DepartmentList'])->name('department.list');
     Route::get('oparetor/list', [OparetorController::class, 'OpaetorList'])->name('oparetor.list');
+    Route::get('/edit/oparetor/{id}', [OparetorController::class, 'OparetorEdit'])->name('oparetor.edit');
     Route::post('/branch/add', [BranchController::class, 'BranchAdd'])->name('branch.add');
     Route::post('/department/add', [BranchController::class, 'DepartmentAdd'])->name('department.add');
     Route::post('/oparetor/branch/add', [OparetorController::class, 'BranchOparetorAdd'])->name('branch.oparetor.add');

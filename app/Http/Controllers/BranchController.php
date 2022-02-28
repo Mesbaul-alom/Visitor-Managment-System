@@ -32,6 +32,12 @@ class BranchController extends Controller
        return view('admin.departmentslist',compact('departments','branchs'));
    }
  
+   public function  BranchEdit($id){
+    // $id= auth()->id();
+    $branch=Branch::find($id);
+       return view('admin.branchedit',compact('branch'));
+   }
+ 
      public function BranchAdd(Request $request)
    {
       $id= auth()->id();
@@ -48,6 +54,20 @@ class BranchController extends Controller
     $branch->save();
     $notification = array(
         'message' => 'Branch Added Sucessyfuly',
+        'alert-type' => 'success',
+    );
+    return redirect('/branch/list')->with($notification);
+   }
+     public function Branchdupdate(Request $request,$id)
+   {
+     
+      $branch=Branch::find($id);
+    $branch->name=$request->name;
+    $branch->address=$request->address;
+    $branch->phone=$request->phone;
+    $branch->save();
+    $notification = array(
+        'message' => 'Branch Update Sucessyfuly',
         'alert-type' => 'success',
     );
     return redirect('/branch/list')->with($notification);

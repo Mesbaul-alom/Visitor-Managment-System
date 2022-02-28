@@ -23,6 +23,16 @@ class OparetorController extends Controller
     //    $branchs=Branch::where('organization_id',$id)->get();
         return view('oparetor.oparetorlist',compact('oparetors','branchs'));
     }
+    public function  OparetorEdit($id){
+        $idd= auth()->id();
+        $user_id=User::find($idd);
+        $iddd=Admin::where('id',$user_id->admin_id)->first();
+        $branchs=Branch::where('organization_id',$iddd->organization)->get();
+        
+        $oparetor=Oparetor::find($id);
+
+        return view('oparetor.oparetoredit',compact('oparetor','branchs'));
+    }
 
     //Branch admin add funtion
 public function BranchOparetorAdd(Request $request)

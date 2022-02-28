@@ -1,9 +1,12 @@
 <div class="navbar-custom">
-    <div class="container-fluid">
+    
+    <div class="container-fluid" >
+       
+       
         <ul class="list-unstyled topnav-menu float-end mb-0">
-
-            <li class="d-none d-lg-block">
-
+           
+            <li style="padding-right:100px">
+                <h1 style="color: white">VMS</h1>
             </li>
             @php
             $id= auth()->id();

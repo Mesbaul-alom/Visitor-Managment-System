@@ -24,7 +24,8 @@ class EmployeeController extends Controller
    
         $employees=Employee::where('employee_role',1)->where('branch_id',$id->branch)->get();
          $organization=Designation::all();
-        return view('employee.employeelist',compact('employees','organization'));
+         $departments=Department::where('branch_id',$id->branch)->get();
+        return view('employee.employeelist',compact('employees','organization','departments'));
     }
     public function  Employeelistget($id){
        
@@ -36,7 +37,9 @@ class EmployeeController extends Controller
         $employees=Employee::all();
         // $branchs=Branch::all();
         $organization=Designation::all();
-        return view('employee.employeelist',compact('employees','organization'));
+        $departments=Department::all();
+       
+        return view('employee.employeelist',compact('employees','organization','departments'));
     }
     public function  Receplist(){
        
@@ -70,7 +73,7 @@ class EmployeeController extends Controller
     $admin->email=$request->email;
     $admin->employee_role=1;
      $admin->branch_id=$branch;
-      $admin->department_id=$department;
+      $admin->department_id=$request->depatment;
     $admin->password=$request->password;
     $admin->save();
     $notification = array(
@@ -233,9 +236,9 @@ public function VisitorStore(Request $request){
       
         $image_base64 = base64_decode($image_parts[1]);
         $fileName = uniqid() . '.png';
-        $image=$request->image->move(public_path('org_img'),$fileName);
+        // $image=$request->image->move(public_path('org_img'),$fileName);
         // dd( $fileName);
-        $file = $folderPath . $fileName;
+        $file = $fileName;
         file_put_contents($file, $image_base64);
 
         $id= auth()->id();
@@ -279,7 +282,15 @@ public function VisitorStore(Request $request){
         // print_r($);
 
         // $admin->image=$request->input('image')[$key];
+       
          $admin->save();
+        
+         $name=$request->input('name');
+         $to=$employee;
+         $to=Employee::find($to);
+         $to=$to->phone;
+         
+         $this->sendsms($name,$to);
         
         }
         
@@ -293,6 +304,27 @@ public function VisitorStore(Request $request){
    
   
 }
+// 8801788174010
+function sendsms($to,$name) {
+    $url = "http://bulksms.gotmyhost.com/smsapi";
+
+    $data = [
+      "api_key" => "C20010856176390e772f52.37553912",
+      "type" =>"text",
+      "contacts" =>"88$to",
+      "senderid" => "8809612441389",
+      "msg" => "You got a new visitor $name. Check your VMS account",
+    ];
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return $response;
+  }
 
 
 public function PendingVisiroelist(){

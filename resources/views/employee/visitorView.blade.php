@@ -19,11 +19,14 @@
                                 <div class="col-7">
                                     <div class="text-primary p-3">
                                         <h5 class="text-primary">Welcome</h5>
-                                        <img src="{{('/org_img/'.$vuser->image)}}" alt="" class="img-thumbnail rounded-circle">
+                                        <img src=" {{URL::asset($vuser->image)}}" style="height: 150px">
+                                        {{-- <img src="{{('/org_img/'.$vuser->image)}}" alt="" class="img-thumbnail rounded-circle"> --}}
                                     </div>
                                 </div>
                                 <div class="col-5 align-self-end">
-                                    <img src="{{asset('assets\images\profile-img.png')}}" alt="" class="img-fluid">
+                                   
+                                  
+                                    {{-- <img src="{{asset('assets\images\profile-img.png')}}" alt="" class="img-fluid"> --}}
                                 </div>
                             </div>
                         </div>

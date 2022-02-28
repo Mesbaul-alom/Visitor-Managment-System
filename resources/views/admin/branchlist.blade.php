@@ -48,7 +48,7 @@
                                         @endif
 
                                         <td>
-                                     <a href="/edit/organization/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                     <a href="/edit/branch/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                     <a href="/delete/admin/organization/{{$admin->id}}" class="btn btn-danger" id="delete"><i class="fas fa-trash-alt"></i></a>
                                    
                                         </td>

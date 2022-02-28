@@ -30,7 +30,7 @@
                                         <th>Phone</th>
                                         <th>Email</th>
                                         <th>Branch</th>
-                                        <th>Status</th>
+                                        {{-- <th>Status</th> --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -42,11 +42,11 @@
                                         <td>{{$admin->phone}}</td>
                                         <td>{{$admin->email}}</td>
                                         <td>{{$admin->organization}}</td>
-                                        @if ($admin->is_active == 1)
+                                        {{-- @if ($admin->is_active == 1)
                                         <td > <span class="btn btn-primary">Active</span> </td>
                                         @else
                                            <td>Diactive</td>
-                                        @endif
+                                        @endif --}}
 
                                         <td>
                                             <a href="/employee/details/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
@@ -109,6 +109,22 @@
                 {{-- <input type="phone" name="phone" parsley-trigger="change" value="{{old('phone')}}" class="form-control" id="phone" /> --}}
                 @if($errors->has('organization'))
                 <div style="color:red"> {{$errors->first('organization')}}</div>
+                @endif
+               </div>
+               <div class="mb-3">
+                <label for="depatment" class="form-label">Department<span class="text-danger">*</span></label>
+                <select name="depatment" id="depatment" class="form-control" >
+                    <option selected disabled>Select depatment</option>
+                  @foreach ($departments as $org)
+                  <option value="{{$org->id}}">{{$org->name}}</option>
+                  @endforeach
+                    
+                 
+                  
+                </select>
+                {{-- <input type="phone" name="phone" parsley-trigger="change" value="{{old('phone')}}" class="form-control" id="phone" /> --}}
+                @if($errors->has('depatment'))
+                <div style="color:red"> {{$errors->first('depatment')}}</div>
                 @endif
                </div>
                <div class="mb-3">

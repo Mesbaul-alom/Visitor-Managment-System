@@ -28,7 +28,7 @@
                                         <th>Phone</th>
                                         <th>Email</th>
                                         <th>Organization</th>
-                                        <th>Status</th>
+                                        {{-- <th>Status</th> --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -42,14 +42,14 @@
                                         <td>{{$admin->phone}}</td>
                                         <td>{{$admin->email}}</td>
                                         <td>{{$admin->organization}}</td>
-                                        @if ($admin->is_active == 1)
+                                        {{-- @if ($admin->is_active == 1)
                                         <td > <span class="btn btn-primary">Active</span> </td>
                                         @else
                                            <td>Diactive</td>
-                                        @endif
+                                        @endif --}}
 
                                         <td>
-                                     <a href="/edit/organization/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                     <a href="/edit/oparetor/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                     <a href="/delete/admin/organization/{{$admin->id}}" class="btn btn-danger" id="delete"><i class="fas fa-trash-alt"></i></a>
                                    
                                         </td>
