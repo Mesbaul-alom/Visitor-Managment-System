@@ -47,7 +47,8 @@
                                         @endif
 
                                         <td>
-                                     <a href="/edit/organization/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                            {{-- <button type="button" class="btn  btn-primary edit_operator" data-id="{{ $admin->id }}" data-bs-toggle="modal" data-bs-target="#edit_operator_modal" ><i class="fas fa-edit"></i></button> --}}
+                                     <a href="/edit/department/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                     <a href="/delete/admin/organization/{{$admin->id}}" class="btn btn-danger" id="delete"><i class="fas fa-trash-alt"></i></a>
                                    
                                         </td>
@@ -109,7 +110,6 @@
     </div>
   </div>
  {{-- add admin modal end --}}
- <script>
 
- </script>
+
 @endsection

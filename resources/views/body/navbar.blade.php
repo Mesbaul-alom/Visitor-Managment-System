@@ -5,9 +5,7 @@
        
         <ul class="list-unstyled topnav-menu float-end mb-0">
            
-            <li style="padding-right:100px">
-                <h1 style="color: white">VMS</h1>
-            </li>
+         
             @php
             $id= auth()->id();
             $id=\App\Models\User::find($id);
@@ -148,6 +146,21 @@
 
 
         </ul>
+        <div class="logo-box">
+            <a href="/home" class="logo logo-dark text-center">
+                <span class="logo-sm">
+                    <img src="../assets/images/logo-sm.png" alt="" height="22">
+                    <!-- <span class="logo-lg-text-light">UBold</span> -->
+                </span>
+                <span class="logo-lg">
+                    <img src="../assets/images/logo-dark.png" alt="" height="20">
+                    <!-- <span class="logo-lg-text-light">U</span> -->
+                </span>
+            </a>
+
+            <h1 style="color: white" >VMS</h1>
+        </div>
+      
 
       
         <ul class="list-unstyled topnav-menu topnav-menu-left m-0">

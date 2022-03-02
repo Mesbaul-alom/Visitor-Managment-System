@@ -26,7 +26,7 @@
                                <input type="search">
                            </center> --}}
 
-                            <table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
+                            <table id="example" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>
                                         <th>Name</th>
@@ -56,6 +56,9 @@
                                             
                                      <a href="/view/visitor/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                      <a href="/edit/organization/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                     @if ($admin->checkout == null)
+                                     <a href="/visitor/checkout/{{$admin->id}}" class="btn btn-primary" >check Out</a>
+                                 @endif
                                     {{-- <a href="/delete/admin/organization/{{$admin->id}}" class="btn btn-danger" id="delete"><i class="fas fa-trash-alt"></i></a> --}}
                                    
                                         </td>

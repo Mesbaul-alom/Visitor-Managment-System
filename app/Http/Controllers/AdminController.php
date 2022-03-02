@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Department;
 use App\Models\User;
+use App\Models\Branch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -50,5 +52,28 @@ public function OrganizationAdminAdd(Request $request)
         return redirect('/organization/admin/list')->with($notification);
     }
    
+}
+
+public function DepartmentEdit($id){
+    $idd= auth()->id();
+    $user_id=User::find($idd);
+    $iddd=Admin::where('id',$user_id->admin_id)->first();
+    $branchs=Branch::where('organization_id',$iddd->organization)->get();
+    $department=Department::find($id);
+    // dd($department);
+    return view('admin.departmentedit',compact('department','branchs'));
+}
+public function Departmentupdate(Request $request,$id){
+
+    // dd($request);
+$dept=Department::find($id);
+   $dept->name=$request->name;
+    $dept->branch_id=$request->branch;
+    $dept->save();
+    $notification = array(
+        'message' => 'Department Update Sucessyfuly',
+        'alert-type' => 'success',
+    );
+    return redirect('/department/list')->with($notification);
 }
 }

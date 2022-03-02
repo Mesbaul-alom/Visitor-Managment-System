@@ -16,10 +16,12 @@
                     <div class="card overflow-hidden">
                         <div class="bg-soft-primary">
                             <div class="row">
-                                <div class="col-7">
+                                <div class="col-7"> 
                                     <div class="text-primary p-3">
-                                        <h5 class="text-primary">Welcome</h5>
-                                        <img src=" {{URL::asset($vuser->image)}}" style="height: 150px">
+                                        {{-- <h5 class="text-primary">Welcome</h5> --}}
+                                    <center>
+                                        <img src=" {{URL::asset($vuser->image)}}" style="width: 200px;height:200px ">
+                                    </center>
                                         {{-- <img src="{{('/org_img/'.$vuser->image)}}" alt="" class="img-thumbnail rounded-circle"> --}}
                                     </div>
                                 </div>
@@ -97,7 +99,7 @@
     
 </center>
 <hr>
-<table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
+<table id="example" class="table table-striped dt-responsive nowrap w-100">
     <thead>
         <tr>
             <th>Employee Name</th>
@@ -129,19 +131,23 @@
             <td>{{$visitors->reason}}</td>
             <td>{{$visitors->checkin}}</td>
             <td>{{$visitors->checkout}}</td>
-            @if ($visitors->checkoutfinal == 0)
+            @php
+            $date=\Carbon\Carbon::now();
+            
+        @endphp
+            @if ($visitors->checkoutfinal == 0 &&  $visitors->checkout > $date)
                 
         
             <td>
-                @if ($visitors->approve == null)
+                @if ($visitors->approve == null &&  $visitors->checkout > $date)
                 <a href="/approve/visitor/{{$visitors->id}}" class="btn btn-primary">Aprrove</a>
                 <a href="/reject/visitor/{{$visitors->id}}" class="btn btn-danger">Reject</a>
                 @endif
-                @if ($visitors->approve == 1)
+                @if ($visitors->approve == 1 &&  $visitors->checkout > $date)
                
                 <a href="/reject/visitor/{{$visitors->id}}" class="btn btn-danger">Reject</a>
                 @endif
-                @if ($visitors->approve == 2)
+                @if ($visitors->approve == 2 &&  $visitors->checkout > $date)
                 <a href="/approve/visitor/{{$visitors->id}}" class="btn btn-primary">Aprrove</a>
             
                 @endif
@@ -155,11 +161,15 @@
         
             </td>
             @endif
+
+           
             <td>{{$visitors->approve_by	}}</td>
             <td>
-                @if ($visitors->checkoutfinal == 0)
-                <a class="btn btn-success" >Already Check In Now</a>
-            @else
+                @if ($visitors->checkoutfinal == 0 &&  $visitors->checkout > $date)
+                <a class="btn btn-success" >lready Check In Now</a>
+            @elseif ( $visitors->checkoutfinal == 0 &&  $visitors->checkout <= $date)
+            <a class="btn btn-danger" >Already Check Out</a>
+            @elseif ($visitors->checkoutfinal == 1)
             <a class="btn btn-danger" >Already Check Out</a>
             @endif
         </td>

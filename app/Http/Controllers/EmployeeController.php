@@ -102,6 +102,9 @@ class EmployeeController extends Controller
     }
    
 }
+
+// branch recep add funtion start/////////////////////////
+
     public function BranchRecepAdd(Request $request)
 {
     $id= auth()->id();
@@ -150,9 +153,13 @@ class EmployeeController extends Controller
     }
    
 }
+// branch recep add funtion end/////////////////////////
 
 public function Visiroelist(){
+    // $id= auth()->id();
     $visitors=Vuser::all();
+    // $visitors=Vuser::where('recep_id',$id)->get();
+    // dd( $visitors);
     return view('employee.visitorlist',compact('visitors'));
 }
 public function VisitorAdd(){
@@ -161,8 +168,9 @@ public function VisitorAdd(){
      $branch=Employee::where('id', $user)->pluck('branch_id')->first();
      $deparments=Department::where('branch_id', $branch)->get();
     $employees=Employee::where('employee_role',1)->get();
+    $vusers=Employee::all();
 
-    return view('employee.visitoradd',compact('employees','deparments'));
+    return view('employee.visitoradd',compact('employees','deparments','vusers'));
 }
 
 
@@ -222,6 +230,9 @@ public function VisitorAdd(){
    
   
 // }
+
+
+// visitor Add funtion start//////////////////////////////////////
 public function VisitorStore(Request $request){
    
     // foreach($request->input('name') as $key=>$name){
@@ -251,11 +262,15 @@ public function VisitorStore(Request $request){
             $admin->phone=$request->input('phone');
             $admin->email=$request->input('email');
             $admin->gender=$request->input('gender');
+            $admin->v_id=$request->input('id');
             $admin->image=$fileName;
             $admin->save();
          }
+         $vcard_id=Vuser::where('phone',$request->input('phone'))->first();
+         $vcard_id->v_id=$request->input('id');
+         $vcard_id->save();
          $v_id=Vuser::where('phone',$request->input('phone'))->first();
-        //   dd($request->all());
+        //  dd($request->all());
         foreach($request->input('employee') as  $key=>$employee){
         $admin= new Visitor;
         $admin->name=$request->input('name');;
@@ -305,7 +320,7 @@ public function VisitorStore(Request $request){
   
 }
 // 8801788174010
-function sendsms($to,$name) {
+function sendsms($name,$to) {
     $url = "http://bulksms.gotmyhost.com/smsapi";
 
     $data = [
@@ -344,8 +359,8 @@ public function AllVisiroelist(){
 
 }
 public function HistoryVisiroelist(){
-   
-    $visitors=Visitor::with('emp')->get();
+    $id= auth()->id();
+    $visitors=Visitor::with('emp')->where('recep_id',$id)->get();
     return view('employee.historyvisitor',compact('visitors'));
 
 }
@@ -366,9 +381,10 @@ public function RejectedVisiroelist(){
 
 }
 public function VisitorView($id){
+    $recep_id= auth()->id();
     $vuser=Vuser::with('visitor')->find($id);
    
-    $visitorss=Visitor::with('emp')->where('vuser_id',$id)->get();
+    $visitorss=Visitor::with('emp')->where('vuser_id',$id)->where('recep_id',$recep_id)->get();
    
     
     return view('employee.visitorView',compact('visitorss','vuser'));
@@ -429,24 +445,31 @@ public function VisitorReject($id){
 public function VisitorCheckOut($id){
     $current = Carbon::now();
     $name= auth()->user()->name;
+$vv_id=Vuser::find($id);
+$vv_id->v_id=NULL;
+$vv_id->save();
+$recep_id= auth()->id();
+$visitors=Visitor::where('vuser_id',$id)->where('recep_id',$recep_id)->where('checkoutfinal',null)->get();
+ 
 
-$visitors=Visitor::where('vuser_id',$id)->get();
-foreach ($visitors as  $visitor) {
-    $visitor=Visitor::find($visitor->id);
-    $visitor->checkout=$current;
-    $visitor->checkoutfinal=1;
-    $visitor->approve=2;
-    $visitor->v_id=NULL;
-    $visitor->approve_by	= $name;
-    $visitor->save();
-}
+    foreach ($visitors as  $visitor) {
+        $visitor=Visitor::find($visitor->id);
+        $visitor->checkout=$current;
+        $visitor->checkoutfinal=1;
+        $visitor->approve=2;
+        $visitor->v_id=NULL;
+        $visitor->approve_by	= $name;
+        $visitor->save();
+    }
+    
+    $notification = array(
+        'message' => 'Visitor CheckOut Done',
+        'alert-type' => 'success',
+    );
+    
+    return redirect()->back()->with($notification);
 
-$notification = array(
-    'message' => 'Visitor CheckOut Done',
-    'alert-type' => 'success',
-);
 
-return redirect()->back()->with($notification);
 
 
 }
@@ -474,6 +497,11 @@ public function EmployeeDelete($id){
 public function pendingapplication($id){
     $details=Visitor::find($id);
     return view('employee.pendingapplicatiin',compact('details'));
+}
+
+public function getvisitor($id){
+$visitor=Vuser::Where('phone',$id)->first();
+    return response()->json(compact('visitor'));
 }
  
 

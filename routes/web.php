@@ -70,9 +70,12 @@ Route::group(['middleware'=>['is_admin']] , function(){
     Route::get('branch/list', [BranchController::class, 'BranchList'])->name('branch.list');
     Route::get('/edit/branch/{id}', [BranchController::class, 'BranchEdit'])->name('branch.edit');
     Route::post('/update/branch/admin/{id}', [BranchController::class, 'Branchdupdate'])->name('branch.admin.update');
+    Route::post('/update/oparetor/admin/{id}', [OparetorController::class, 'Oparetordupdate'])->name('oparetor.admin.update');
+    Route::post('/department/update/{id}', [AdminController::class, 'Departmentupdate'])->name('department.admin.update');
     Route::get('department/list', [BranchController::class, 'DepartmentList'])->name('department.list');
     Route::get('oparetor/list', [OparetorController::class, 'OpaetorList'])->name('oparetor.list');
     Route::get('/edit/oparetor/{id}', [OparetorController::class, 'OparetorEdit'])->name('oparetor.edit');
+    Route::get('/edit/department/{id}', [AdminController::class, 'DepartmentEdit'])->name('department.edit');
     Route::post('/branch/add', [BranchController::class, 'BranchAdd'])->name('branch.add');
     Route::post('/department/add', [BranchController::class, 'DepartmentAdd'])->name('department.add');
     Route::post('/oparetor/branch/add', [OparetorController::class, 'BranchOparetorAdd'])->name('branch.oparetor.add');
@@ -99,6 +102,7 @@ Route::group(['middleware'=>['is_employee']] , function(){
     Route::get('/visitor/checkout/{id}', [EmployeeController::class, 'VisitorCheckOut'])->name('visitor.checkout');
     Route::get('/pending/application/{id}', [EmployeeController::class, 'pendingapplication'])->name('pending.application');
     Route::get('/employee-list/{id}', [EmployeeController::class, 'Employeelistget'])->name('emp.list.get');
+    Route::get('/getvisitor-list/{id}', [EmployeeController::class, 'getvisitor'])->name('visitor.list.get');
     // Route::post('/employee/branch/add', [EmployeeController::class, 'BranchemployeeAdd'])->name('branch.employee.add');
 
 });

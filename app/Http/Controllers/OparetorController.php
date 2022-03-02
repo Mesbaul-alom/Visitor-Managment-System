@@ -79,5 +79,40 @@ public function BranchOparetorAdd(Request $request)
     }
    
 }
+public function Oparetordupdate(Request $request,$id)
+{
+ 
+   
+        // $id= auth()->id();
+        // $id=User::find($id);
+        // $id=Admin::where('id',$id->admin_id)->first();
+       
+        $admin= Oparetor::find($id);
+    $admin->name=$request->name;
+    $admin->address=$request->address;
+    $admin->branch=$request->branch;
+    $admin->phone=$request->phone;
+    $admin->comment=$request->comment;
+    $admin->email=$request->email;
+    $admin->password=$request->password;
+    $admin->save();
+    $notification = array(
+        'message' => 'Oparetor Updated Sucessyfuly',
+        'alert-type' => 'success',
+    );
+    $org_id=User::where('oparetor_id', $id)->pluck('id')->first();
+
+    $admin=User::find($org_id);
+    $admin->name=$request->name;
+    $admin->email=$request->email;
+    $admin->password=Hash::make($request->password);
+    $admin->save();
+    
+    return redirect('oparetor/list')->with($notification);
+ 
+   
+}
+
+
 
 }

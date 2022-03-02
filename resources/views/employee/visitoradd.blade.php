@@ -14,32 +14,68 @@
                         {{-- <h3>Search Pre Visited</h3>
                         <input type="search" class="form-control" placeholder="visitor if pre visited"> --}}
                         <div class="card">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                
+                                        <input type="text" name="phone" id="phone" placeholder="Search By Phone" class="form-control">
+                                      
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                           
                             <form action="{{ route('visitor.store') }}" method="POST" enctype="multipart/form-data">
                                 <div class="card-body">
                                     @csrf
                                                
-                                                <input type="text">
-                                                <button>Set</button>
+                                                
                                     <div id="task_container">
                                         <div class="single_task">
+                                            {{-- <div class="row">
+                                                <div class="col-md-5"></div>
+                                                <div class="col-md-2">
+                                                   
+                                                        <label for="">Phone</label>
+                                                
+                                                        <select type="text" name="phone" class="form-control js-example-basic-single" id="phone">
+                                                            <option selected disabled>Select Phone</option>
+                                                            @foreach ($vusers as $deparment)
+                                                                <option value="{{ $deparment->phone }}">{{ $deparment->phone }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                </div>
+                                                {{-- <div class="col-md-4">
+                                                   
+                                                        <label for="">Phone</label>
+                                                        <input type="text" name="phone" class="form-control">
+                                                   
+                                                </div> --}}
+                                                <div class="col-md-5"></div>
+                                            </div>
                                             <div class="row ">
                                                 <div class="col-md-4">
                                                     <label for="">Name</label>
-                                                    <input type="text" name="name" class="form-control">
+                                                    <input type="text" name="name" id="edit_name" class="form-control">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="">Email</label>
-                                                    <input type="text" name="email" class="form-control">
+                                                    <input type="text" name="email" id="edit_email" class="form-control">
                                                 </div>
+
                                                 <div class="col-md-4">
+                                                   
                                                     <label for="">Phone</label>
-                                                    <input type="text" name="phone" class="form-control">
-                                                </div>
+                                                    <input type="text" name="phone" id="edit_phone" class="form-control">
+                                               
+                                            </div>
+                                                
+                                             
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label for="">Gender</label>
-                                                    <select name="gender" id="" class="form-control">
+                                                    <select name="gender" id="edit_gender" class="form-control">
                                                         <option>Male</option>
                                                         <option>Female</option>
                                                     </select>
@@ -139,40 +175,56 @@
 
 
                                             </div>
-                                          
-                                            <div class="row">
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                Click Image
+                                              </button>
+                                            
+                                              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">Image Save</h5>
+                                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
 
 
-                                                <div class="col-md-2">
-
-
+                                                            <div class="col-md-5">
+                                                                <div id="live_camera"></div>
+                                                                <hr/>
+                                                                <input type=button value="Take Snapshot" onClick="capture_web_snapshot()">
+                                                                <input type="hidden" name="image" class="image-tag">
+                                                               
+                                                            </div>
+                                                            {{-- <div class="col-md-4">
+                                                                <label for="">Locar*(if any)</label>
+                                                                <input type="text" name="locar[]" class="form-control">
+                                                            </div> --}}
+                                                            <!-- Button trigger modal -->
+            
+                                                            <div class="col-md-3">
+                                                                <div id="preview"></div>
+                                                               
+                                                            </div>
+                                                            
+                                                            {{-- <div class="col-md-12 text-center pakainfo">
+                                                                <br/>
+                                                                <button class="btn btn-primary pakainfo">Submit</button>
+                                                            </div> --}}
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                               
+                                                              </div>
+                                                        </div>
+            
+                                                    </div>
+                                                  
+                                                  </div>
                                                 </div>
-                                                {{-- <div class="col-md-4">
-                                                    <label for="">Locar*(if any)</label>
-                                                    <input type="text" name="locar[]" class="form-control">
-                                                </div> --}}
-                                                <div class="col-md-4">
-                                                    <div id="live_camera"></div>
-                                                    <hr/>
-                                                    <input type=button value="Take Snapshot" onClick="capture_web_snapshot()">
-                                                    <input type="hidden" name="image" class="image-tag">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div id="preview"></div>
-                                                </div>
-
-                                                <div class="col-md-2">
-
-
-                                                </div>
-                                                {{-- <div class="col-md-12 text-center pakainfo">
-                                                    <br/>
-                                                    <button class="btn btn-primary pakainfo">Submit</button>
-                                                </div> --}}
-                                                </div>
-
-                                            </div>
-
+                                              </div>
+                                         
 
                                         </div>
                                     </div>
@@ -429,6 +481,44 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     var selectCounter = 0;
+    $(document).on('change','#phone',(e)=>
+    {
+        let phone_id = e.target.value;
+        $("#edit_phone").val(phone_id);
+        // const phone  = document.getElementById('phone');
+        // const email   = document.getElementById('email');
+        //    const name   = document.getElementById('name');
+        //    const gender   = document.getElementById('gender');
+           
+     
+        axios.get(`/getvisitor-list/${phone_id}`)
+        .then(response=>{
+
+            const visitor = response?.data?.visitor;
+            console.log(visitor.name);
+                    if(visitor){
+                    $("#edit_name").val(visitor.name);
+                    $("#edit_email").val(visitor.email);
+                    $("#edit_gender").val(visitor.gender);
+                    // $("#edit_image").val(admin.image);
+                  
+                    }
+
+                
+                // phone.value = response.data.visitor.phone;
+                //     v_no.value  = response.data.driver.email;
+                //      gender.value = response.data.visitor.gender;
+                //     name.value  = response.data.visitor.name;
+                //     email.value  = response.data.visitor.email;
+                    
+        })
+        .catch(error=>{
+
+        })
+    });
+</script>
+<script>
+    var selectCounter = 0;
     $(document).on('change','#department',(e)=>
     {
         let driver_id = e.target.value;
@@ -542,7 +632,7 @@
 
 <script language="JavaScript">
     Webcam.set({
-        width: 490,
+        width: 150,
         height: 150,
         image_format: 'jpeg',
         jpeg_quality: 90
@@ -557,5 +647,11 @@
         } );
     }
 </script>
+
+<script>
+    $(document).ready(function() {
+       $('.js-example-basic-single').select2();
+   });
+   </script>
 
 @endpush

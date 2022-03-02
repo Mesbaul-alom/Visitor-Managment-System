@@ -18,7 +18,7 @@
                             <h4 class="header-title">Visitors List</h4>
                            
 
-                            <table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
+                            <table id="example" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>
                                         <th>Name</th>
@@ -41,11 +41,19 @@
                                         <td>{{$admin->email}}</td>
                                         <td>{{$admin->emp->name}}</td>
                                         <td>{{$admin->checkin}}</td>
-                                        @if ($admin->checkoutfinal == 1)
-                                        <td>{{$admin->checkout}}</td>
-                                            @else
-                                            <td>Not Checkout</td>
-                                        @endif
+                                        @php
+                                        $date=\Carbon\Carbon::now();
+                                        
+                                    @endphp
+                                       <td>
+                                        @if ($admin->checkoutfinal == 0 &&  $admin->checkout > $date)
+                                        <a class="btn btn-success" >lready Check In Now</a>
+                                    @elseif ( $admin->checkoutfinal == 0 &&  $admin->checkout <= $date)
+                                    <a class="btn btn-danger" >Already Check Out</a>
+                                    @elseif ($admin->checkoutfinal == 1)
+                                    <a class="btn btn-danger" >{{$admin->checkout}}</a>
+                                    @endif
+                                </td>
                                         
                                         {{-- <td>
                                             

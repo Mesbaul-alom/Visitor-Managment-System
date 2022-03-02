@@ -7,7 +7,7 @@
                               
 
 
-                                <script>document.write(new Date().getFullYear())</script> &copy;Visitor Management System by TradeWave.com <a target="_blank" href=""></a>
+                                <script>document.write(new Date().getFullYear())</script> &copy;Visitor Management System by Tradewave Technology <a target="_blank" href=""></a>
                             
                             </div>
                             <div class="col-md-3">
