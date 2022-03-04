@@ -38,6 +38,35 @@
 <hr>
 
             </div>
+            <table id="example" class="table table-striped dt-responsive nowrap w-100">
+                <thead>
+                    <tr>
+                        <th>Visitor Name</th>
+                        <th>Reason</th>
+                        <th>CheckIn</th>
+                        {{-- @if ($visitors->checkoutfinal == 0) --}}
+                        <th>Check Out</th>
+                       
+                    </tr>
+                </thead>
+            
+            
+                <tbody>
+                   @foreach ($visitorss as $visitors)
+                       
+                 
+                  
+                    <tr>
+                        <td>{{$visitors->name}}</td>
+                        <td>{{$visitors->reason}}</td>
+                        <td>{{$visitors->checkin}}</td>
+                        <td>{{$visitors->checkout}}</td>
+                    
+                    </tr>
+                    @endforeach
+                  
+                </tbody>
+            </table>
         </div>
     </div>
  </div>

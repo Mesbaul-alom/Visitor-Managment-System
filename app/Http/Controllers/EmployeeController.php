@@ -495,8 +495,15 @@ public function EmployeeDelete($id){
 }
 
 public function pendingapplication($id){
+    $idd= auth()->id();
+    $user=User::where('id',$idd)->pluck('employee_id');
+    $vuser_id=Visitor::find($id);
+    $vuser=Vuser::with('visitor')->find($vuser_id->vuser_id);
+  
+    $visitorss=Visitor::with('vuser')->where('vuser_id',$vuser_id->vuser_id)->where('employee',$user)->get();
+    
     $details=Visitor::find($id);
-    return view('employee.pendingapplicatiin',compact('details'));
+    return view('employee.pendingapplicatiin',compact('details','visitorss'));
 }
 
 public function getvisitor($id){

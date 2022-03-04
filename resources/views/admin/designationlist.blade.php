@@ -38,7 +38,8 @@
                                         <td>{{$admin->name}}</td>
 
                                         <td>
-                                     <a href="/edit/designation/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                     {{-- <a href="/edit/designation/{{$admin->id}}" class="btn btn-primary"><i class="fas fa-edit"></i></a> --}}
+                                     <button type="button" class="btn  btn-primary edit_operator" data-id="{{ $admin->id }}" data-bs-toggle="modal" data-bs-target="#edit_operator_modal" ><i class="fas fa-edit"></i></button>
                                     <a href="/delete/admin/designation/{{$admin->id}}" class="btn btn-danger" id="delete"><i class="fas fa-trash-alt"></i></a>
                                    
                                         </td>
@@ -84,7 +85,90 @@
     </div>
   </div>
  {{-- add admin modal end --}}
- <script>
+ {{-- edit modal --}}
+ <div class="modal fade" id="edit_operator_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+ aria-hidden="true">
+ <div class="modal-dialog">
+     <form action="" id="EditOperatorForm">
+         @csrf
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h2>Edit Designation</h2>
+             </div>
+             <div class="modal-body">
+                 <input type="hidden" name="id" id="edit_idd">
+                 <div class="row">
+                     <div class="col-md-12">
+                         <div class="form-group">
+                             <label for=""> Name</label>
+                             <input type="text" class="form-control" name="name" id="edit_name" />
+                             <span class="text-danger" id="edit_name_error"></span>
+                         </div>
+                     </div>
+     
+                 </div>
 
+             </div>
+             <div class="modal-footer">
+                 {{-- <button type="button" class="btn btn-default" data-dismiss="modal">ফিরিয়ে যান</button> --}}
+                 <button type="submit" id="editOperatorButton" class="btn  btn-success success">Update</button>
+             </div>
+         </div>
+     </form>
+ </div>
+
+</div>
+ {{-- edit modal end --}}
+ <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+ <script>
+      $("#EditOperatorForm").on('submit', (e) => {
+            e.preventDefault();
+            const id = $("#edit_idd").val();
+           
+            const formData = new FormData(e.target);
+            console.log(id);
+            axios.post(`/designation/update/${id}`, formData)
+                .then(response => {
+                   
+                    const message = response.data.success;
+                    Swal.fire(
+                        'Success', message, 'success'
+                    );
+                    console.log(message);
+                    $('#edit_operator_modal').modal('hide')
+                })
+                location.reload();
+                .catch(error => {
+                 
+                })
+        });
  </script>
+ <script>
+    const edit_operatorButtons = document.querySelectorAll('.edit_operator');
+    edit_operatorButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            const id = this.dataset.id;
+            axios.get(`/designation/edit/${id}`)
+                .then(response => {
+                   
+                    const designation = response?.data?.designation;
+                    if(designation){
+                    $("#edit_name").val(designation.name);
+                    $("#edit_idd").val(designation.id);
+                    }
+
+                })
+                .catch(error => {
+                    console.log(error);
+                    if (error.response?.status == 404) {
+                        Swal.fire(
+                            'Error!', error.response?.data.error, 'error'
+                        );
+                    }
+                })
+        })
+    })
+
+   
+</script>
 @endsection

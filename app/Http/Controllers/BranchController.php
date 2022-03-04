@@ -112,5 +112,22 @@ class BranchController extends Controller
     );
     return redirect('/designation/list')->with($notification);
    }
+
+
+   public Function DesignationEdit($id){
+    $designation=Designation::find($id);
+    return response()->json(compact('designation'));
+   }
+   public function DesignationUpdate(Request $request,$id)
+   {
+    $designation=Designation::find($id);
+$designation->name=$request->name;
+    $designation->save();
+   
+
+    return response()->json(compact('designation'));
+   }
+   
+  
    
 }

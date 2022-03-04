@@ -80,6 +80,8 @@ Route::group(['middleware'=>['is_admin']] , function(){
     Route::post('/department/add', [BranchController::class, 'DepartmentAdd'])->name('department.add');
     Route::post('/oparetor/branch/add', [OparetorController::class, 'BranchOparetorAdd'])->name('branch.oparetor.add');
     Route::get('designation/list', [BranchController::class, 'DesignationList'])->name('designation.list');
+    Route::get('/designation/edit/{id}', [BranchController::class, 'DesignationEdit'])->name('designation.edit');
+    Route::post('/designation/update/{id}', [BranchController::class, 'DesignationUpdate'])->name('designation.update');
     Route::post('/designation/add', [BranchController::class, 'DesignationAdd'])->name('designation.add');
 
 });
