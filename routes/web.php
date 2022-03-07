@@ -20,7 +20,7 @@ use App\Http\Controllers\EmployeeController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('welcome');
 });
 
  Auth::routes();

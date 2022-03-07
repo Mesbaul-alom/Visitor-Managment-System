@@ -272,7 +272,7 @@ a.ssolink {
       </div>
       <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
         <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-          <h1><a href="http://blog.stackfindover.com/" rel="dofollow">VMS</a></h1>
+          <h1><a href="/#" rel="dofollow">Visitor Management System</a></h1>
         </div>
         <div class="formbg-outer">
           <div class="formbg">
@@ -289,7 +289,7 @@ a.ssolink {
                         <label for="email" class="col-md-3 col-form-label text-md-end">{{ __('Email') }}</label>
 
                         <div class="col-md-9">
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" >
 
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -347,11 +347,9 @@ a.ssolink {
             </div>
           </div>
           <div class="footer-link padding-top--24">
-            <span>Don't have an account? <a href="">Sign up</a></span>
             <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
               <span><a href="#">© tradewave.com</a></span>
-              <span><a href="#">Contact</a></span>
-              <span><a href="#">Privacy & terms</a></span>
+             
             </div>
           </div>
         </div>
